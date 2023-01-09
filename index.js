@@ -62,6 +62,15 @@ client.on("interactionCreate", async interaction => {
 client.on('guildMemberAdd', member => {
   const defaults = ["https://cdn.discordapp.com/embed/avatars/1.png","https://cdn.discordapp.com/embed/avatars/2.png", "https://cdn.discordapp.com/embed/avatars/3.png","https://cdn.discordapp.com/embed/avatars/4.png" ,"https://cdn.discordapp.com/embed/avatars/5.png"];
   if(defaults.includes(String(member.displayAvatarURL()))){
+    const messageEmbed = new EmbedBuilder()
+      .setColor(0xFF0000)
+      .setTitle("Member kicked")
+      .addFields({name: "Nickname", value:`${member.nickname}`},
+      {name: "Reason:", value:"Default profile picture"})
+      .setImage(`${member.displayAvatarURL()}`)
+      .setTimestamp()
+      .setFooter({text:"Skill Issue Bot"})
+    member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
     member.kick();
   }
 })
