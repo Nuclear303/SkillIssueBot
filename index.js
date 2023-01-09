@@ -66,7 +66,8 @@ client.on('guildMemberAdd', member => {
       .setColor(0xFF0000)
       .setTitle("Member kicked")
       .addFields({name: "Nickname", value:`${member.nickname}`},
-      {name: "Reason:", value:"Default profile picture"})
+      {name: "Reason:", value:"Default profile picture"},
+      {name: "ID:", value:`${member.id}`})
       .setImage(`${member.displayAvatarURL()}`)
       .setTimestamp()
       .setFooter({text:"Skill Issue Bot"})
