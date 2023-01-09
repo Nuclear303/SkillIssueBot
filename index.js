@@ -65,7 +65,7 @@ client.on('guildMemberAdd', member => {
     const messageEmbed = new EmbedBuilder()
       .setColor(0xFF0000)
       .setTitle("Member kicked")
-      .addFields({name: "Nickname", value:`${member.nickname}`},
+      .addFields({name: "Nickname", value:`${member.user.username}`},
       {name: "Reason:", value:"Default profile picture"},
       {name: "ID:", value:`${member.id}`})
       .setImage(`${member.displayAvatarURL()}`)
