@@ -65,7 +65,7 @@ client.on('guildMemberAdd', member => {
     const messageEmbed = new EmbedBuilder()
       .setColor(0xFF0000)
       .setTitle("Member kicked")
-      .addFields({name: "Nickname", value:`${member.user.username}#${member.user.tag}`},
+      .addFields({name: "Nickname", value:`${member.user.tag}`},
       {name: "Reason:", value:"Default profile picture"},
       {name: "ID:", value:`${member.id}`})
       .setImage(`${member.displayAvatarURL()}`)
@@ -85,7 +85,7 @@ client.on('guildMemberAdd', member => {
 
     member.send({embeds:[dmEmbed]}).catch(_=>{
       console.error(`Cannot message ${member.user.username}`)
-      member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.username}#${member.user.tag}`);
+      member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}`);
     });   
     member.kick();
   }
