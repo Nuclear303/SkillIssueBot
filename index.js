@@ -1,7 +1,7 @@
 require('dotenv').config();
 const {REST} = require("@discordjs/rest");
 const {Routes} = require("discord-api-types/v9");
-const {  Client, IntentsBitField, Collection, Events } = require("discord.js");
+const {  Client, IntentsBitField, Collection, EmbedBuilder } = require("discord.js");
 const path = require("path");
 const fs = require("fs");
 const client = new Client({
