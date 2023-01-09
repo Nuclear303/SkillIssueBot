@@ -72,7 +72,7 @@ client.on('guildMemberAdd', member => {
       .setTimestamp()
       .setFooter({text:"Skill Issue Bot"});
 
-      
+
     const dmEmbed = new EmbedBuilder()
       .setColor(0xFF0000)
       .setTitle("You got kicked")
@@ -82,7 +82,7 @@ client.on('guildMemberAdd', member => {
       .setTimestamp()
       .setFooter({text:"Skill Issue Bot"});
     member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
-    member.send({embeds:[dmEmbed]});
+    member.user.send({embeds:[dmEmbed]});
     member.kick();
   }
 })
