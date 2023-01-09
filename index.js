@@ -82,7 +82,12 @@ client.on('guildMemberAdd', member => {
       .setTimestamp()
       .setFooter({text:"Skill Issue Bot"});
     member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
-    member.user.send({embeds:[dmEmbed]});
+    try{
+      member.user.send({embeds:[dmEmbed]});
+    }
+    catch(err){
+      console.error(`Cannot message ${member.user.username}`)
+    }
     member.kick();
   }
 })
