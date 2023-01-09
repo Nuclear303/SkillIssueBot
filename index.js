@@ -65,7 +65,7 @@ client.on('guildMemberAdd', member => {
     const messageEmbed = new EmbedBuilder()
       .setColor(0xFF0000)
       .setTitle("Member kicked")
-      .addFields({name: "Nickname", value:`${member.user.username}`},
+      .addFields({name: "Nickname", value:`${member.user.username}#${member.user.tag}`},
       {name: "Reason:", value:"Default profile picture"},
       {name: "ID:", value:`${member.id}`})
       .setImage(`${member.displayAvatarURL()}`)
@@ -82,12 +82,11 @@ client.on('guildMemberAdd', member => {
       .setTimestamp()
       .setFooter({text:"Skill Issue Bot"});
     member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
-    try{
-      member.user.send({embeds:[dmEmbed]});
-    }
-    catch(err){
+
+    member.users.cache.get(`${member.id}`).send({embeds:[dmEmbed]}).catch(_=>{
       console.error(`Cannot message ${member.user.username}`)
-    }
+      member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.username}#${member.user.tag}`);
+    });   
     member.kick();
   }
 })
