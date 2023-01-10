@@ -59,6 +59,7 @@ client.on("interactionCreate", async interaction => {
         await interaction.reply({content: "There was an error executing this command"});
     }
 });
+
 client.on('guildMemberAdd', member => {
   const defaults = ["https://cdn.discordapp.com/embed/avatars/0.png","https://cdn.discordapp.com/embed/avatars/1.png","https://cdn.discordapp.com/embed/avatars/2.png", "https://cdn.discordapp.com/embed/avatars/3.png","https://cdn.discordapp.com/embed/avatars/4.png" ,"https://cdn.discordapp.com/embed/avatars/5.png"];
   if(defaults.includes(String(member.displayAvatarURL()))){
@@ -81,8 +82,10 @@ client.on('guildMemberAdd', member => {
     {name:"Why do you do that?", value:"It's a bot prevention mechanism"})
     .setTimestamp()
     .setFooter({text:"Skill Issue Bot"});
-
+    var tries = 0;
     const sendDM = _=>{
+      tries++;
+      member.guild.channels.cache.get("1062081528567431218").send(`Try #${tries}`); 
       member.send({embeds:[dmEmbed]})
         .then(_=>{
           console.log(`Successfully messaged ${member.user.username}`)
