@@ -94,7 +94,9 @@ client.on('guildMemberAdd', member => {
         .catch(_=>{
           console.error(`Cannot message ${member.user.username}. Retrying...`)
           member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}. Retrying...`);
-          sendDM()
+          if(tries < 10){
+            sendDM()
+          }
         });
     }
     
