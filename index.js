@@ -63,26 +63,41 @@ client.on('guildMemberAdd', member => {
   const defaults = ["https://cdn.discordapp.com/embed/avatars/0.png","https://cdn.discordapp.com/embed/avatars/1.png","https://cdn.discordapp.com/embed/avatars/2.png", "https://cdn.discordapp.com/embed/avatars/3.png","https://cdn.discordapp.com/embed/avatars/4.png" ,"https://cdn.discordapp.com/embed/avatars/5.png"];
   if(defaults.includes(String(member.displayAvatarURL()))){
     const messageEmbed = new EmbedBuilder()
-      .setColor(0xFF0000)
-      .setTitle("Member kicked")
-      .addFields({name: "Nickname", value:`${member.user.tag}`},
-      {name: "Reason:", value:"Default profile picture"},
-      {name: "ID:", value:`${member.id}`})
-      .setImage(`${member.displayAvatarURL()}`)
-      .setTimestamp()
-      .setFooter({text:"Skill Issue Bot"});
-
-
+    .setColor(0xFF0000)
+    .setTitle("Member kicked")
+    .addFields({name: "Nickname", value:`${member.user.tag}`},
+    {name: "Reason:", value:"Default profile picture"},
+    {name: "ID:", value:`${member.id}`})
+    .setImage(`${member.displayAvatarURL()}`)
+    .setTimestamp()
+    .setFooter({text:"Skill Issue Bot"});
+    
+    
     const dmEmbed = new EmbedBuilder()
-      .setColor(0xFF0000)
-      .setTitle("You got kicked")
-      .addFields({name: "Reason:", value:"Default profile picture (Safety measure)"},
-      {name: "What can I do?", value:"Please change your profile picture and you'll be more than welcome to join!"},
-      {name:"Why do you do that?", value:"It's a bot prevention mechanism"})
-      .setTimestamp()
-      .setFooter({text:"Skill Issue Bot"});
-    member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
+    .setColor(0xFF0000)
+    .setTitle("You got kicked")
+    .addFields({name: "Reason:", value:"Default profile picture (Safety measure)"},
+    {name: "What can I do?", value:"Please change your profile picture and you'll be more than welcome to join!"},
+    {name:"Why do you do that?", value:"It's a bot prevention mechanism"})
+    .setTimestamp()
+    .setFooter({text:"Skill Issue Bot"});
 
+    const sendDM = _=>{
+      member.send({embeds:[dmEmbed]})
+        .then(_=>{
+          console.log(`Successfully messaged ${member.user.username}`)
+          member.guild.channels.cache.get("1062081528567431218").send(`Successfully sent a message to ${member.user.tag}`);
+        })
+        .catch(_=>{
+          console.error(`Cannot message ${member.user.username}`)
+          member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}. Retrying...`);
+          sendDM()
+        });
+    }
+    sendDM();
+    
+    member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
+    
     member.send({embeds:[dmEmbed]})
     .then(_=>{
       console.log(`Successfully messaged ${member.user.username}`)
