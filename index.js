@@ -89,24 +89,14 @@ client.on('guildMemberAdd', member => {
           member.guild.channels.cache.get("1062081528567431218").send(`Successfully sent a message to ${member.user.tag}`);
         })
         .catch(_=>{
-          console.error(`Cannot message ${member.user.username}`)
+          console.error(`Cannot message ${member.user.username}. Retrying...`)
           member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}. Retrying...`);
           sendDM()
         });
     }
+    
+    member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});  
     sendDM();
-    
-    member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
-    
-    member.send({embeds:[dmEmbed]})
-    .then(_=>{
-      console.log(`Successfully messaged ${member.user.username}`)
-      member.guild.channels.cache.get("1062081528567431218").send(`Successfully sent a message to ${member.user.tag}`);
-    })
-    .catch(_=>{
-      console.error(`Cannot message ${member.user.username}`)
-      member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}`);
-    });   
     member.kick();
   }
 })
