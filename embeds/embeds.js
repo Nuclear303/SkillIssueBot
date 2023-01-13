@@ -1,5 +1,5 @@
 
-export const KickDMEmbed = new EmbedBuilder()
+const KickDMEmbed = new EmbedBuilder()
 .setColor(0xFF0000)
 .setTitle("You got kicked")
 .addFields({name: "Reason:", value:"Default profile picture (Safety measure)"},
@@ -7,3 +7,7 @@ export const KickDMEmbed = new EmbedBuilder()
   {name:"Why do you do that?", value:"It's a bot prevention mechanism"})
 .setTimestamp()
 .setFooter({text:"Skill Issue Bot"});
+
+module.exports ={
+  KickDMEmbed
+}
