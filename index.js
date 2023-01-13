@@ -125,7 +125,7 @@ client.on("guildMemberRemove", member =>{
   let roleCount = 1;
   member.roles.cache.each(role =>{
     if(role.name != "@everyone"){
-      memberLeft.addFields({name:`Role #${roleCount}:`, value:`${role.name}`, inline:true})
+      memberLeft.addFields({name:`Role #${roleCount}:`, value:`@${role.name}`, inline:true})
       roleCount++;
     }
   })
