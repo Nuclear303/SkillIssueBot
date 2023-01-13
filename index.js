@@ -117,10 +117,9 @@ client.on("guildMemberRemove", member =>{
   .setTitle("Member left")
   .setThumbnail(`${member.displayAvatarURL()}`)
   .setColor(0xC93035)
-  .addFields(
-    {name: "Nickname", value:`${member.user.tag}`},
+  .addFields({name: "Nickname", value:`${member.user.tag}`},
     {name: "ID:", value:`${member.id}`},
-    {name:"Roles", value:``, inline:true}
+    {name:"Roles", value:":", inline:true}
   )
   .setImage(`${member.displayAvatarURL()}`)
   .setFooter({text: "Skill Issue Bot - Member Left"})
