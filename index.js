@@ -73,7 +73,7 @@ client.on('guildMemberAdd', member => {
       {name:"Account age", value:`${member.user.createdAt}`}
     )
     .setImage(`${member.displayAvatarURL()}`)
-    .setFooter("Skill Issue Bot - Member Joined")
+    .setFooter({text:"Skill Issue Bot - Member Joined"})
     .setTimestamp()
   ]});
 
