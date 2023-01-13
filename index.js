@@ -120,7 +120,6 @@ client.on("guildMemberRemove", member =>{
   .addFields({name: "Nickname", value:`${member.user.tag}`},
     {name: "ID:", value:`${member.id}`},
   )
-  .setImage(`${member.displayAvatarURL()}`)
   .setFooter({text: "Skill Issue Bot - Member Left"})
   .setTimestamp();
   let roleCount = 1;
