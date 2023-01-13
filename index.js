@@ -72,7 +72,6 @@ client.on('guildMemberAdd', member => {
       {name: "ID:", value:`${member.id}`},
       {name:"Account age", value:`${member.user.createdAt}`}
     )
-    .setImage(`${member.displayAvatarURL()}`)
     .setFooter({text:"Skill Issue Bot - Member Joined"})
     .setTimestamp()
   ]});
@@ -113,23 +112,23 @@ client.on('guildMemberAdd', member => {
   }
 })
 
-// client.on("guildMemberRemove", member=>{
-//   const memberLeft = new EmbedBuilder()
-//   .setTitle("Member left")
-//   .setThumbnail(`${member.displayAvatarURL()}`)
-//   .setColor(0xC93035)
-//   .addFields(
-//     {name: "Nickname", value:`${member.user.tag}`},
-//     {name: "ID:", value:`${member.id}`},
-//     {name:"Roles", value:``, inline:true}
-//   )
-//   .setImage(`${member.displayAvatarURL()}`)
-//   .setFooter({text: "Skill Issue Bot - Member Left"})
-//   .setTimestamp();
+client.on("guildMemberRemove", member =>{
+  const memberLeft = new EmbedBuilder()
+  .setTitle("Member left")
+  .setThumbnail(`${member.displayAvatarURL()}`)
+  .setColor(0xC93035)
+  .addFields(
+    {name: "Nickname", value:`${member.user.tag}`},
+    {name: "ID:", value:`${member.id}`},
+    {name:"Roles", value:``, inline:true}
+  )
+  .setImage(`${member.displayAvatarURL()}`)
+  .setFooter({text: "Skill Issue Bot - Member Left"})
+  .setTimestamp();
 
-//   member.roles.cache.each(role =>{
-//     memberKick.addFields({name:"", value:role, inline:true})
-//   })
-//   member.guild.channels.cache.get("999028490164772985").send({embeds:[memberLeft]});
-// })
+  member.roles.cache.each(role =>{
+    memberKick.addFields({name:"", value:role, inline:true})
+  })
+  member.guild.channels.cache.get("999028490164772985").send({embeds:[memberLeft]});
+})
 client.login(process.env.TOKEN)
