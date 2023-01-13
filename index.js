@@ -62,20 +62,20 @@ client.on("interactionCreate", async interaction => {
 });
 
 client.on('guildMemberAdd', member => {
-  member.guild.channels.cache.get("999028490164772985").send({embeds:[
-    new EmbedBuilder()
-    .setTitle("Member joined")
-    .setThumbnail(`${member.displayAvatarURL()}`)
-    .setColor(0x166AFC)
-    .addFields(
-      {name: "Nickname", value:`${member.user.tag}`},
-      {name: "ID:", value:`${member.id}`},
-      {name:"Account age", value:`${member.user.createdAt}`}
-    )
-    .setImage(`${member.displayAvatarURL()}`)
-    .setFooter({text:"Skill Issue Bot - Member Joined"})
-    .setTimestamp()
-  ]});
+  // member.guild.channels.cache.get("999028490164772985").send({embeds:[
+  //   new EmbedBuilder()
+  //   .setTitle("Member joined")
+  //   .setThumbnail(`${member.displayAvatarURL()}`)
+  //   .setColor(0x166AFC)
+  //   .addFields(
+  //     {name: "Nickname", value:`${member.user.tag}`},
+  //     {name: "ID:", value:`${member.id}`},
+  //     {name:"Account age", value:`${member.user.createdAt}`}
+  //   )
+  //   .setImage(`${member.displayAvatarURL()}`)
+  //   .setFooter({text:"Skill Issue Bot - Member Joined"})
+  //   .setTimestamp()
+  // ]});
 
   const defaults = ["https://cdn.discordapp.com/embed/avatars/0.png","https://cdn.discordapp.com/embed/avatars/1.png","https://cdn.discordapp.com/embed/avatars/2.png", "https://cdn.discordapp.com/embed/avatars/3.png","https://cdn.discordapp.com/embed/avatars/4.png" ,"https://cdn.discordapp.com/embed/avatars/5.png"];
   if(defaults.includes(String(member.displayAvatarURL()))){
@@ -113,23 +113,23 @@ client.on('guildMemberAdd', member => {
   }
 })
 
-client.on("guildMemberRemove", member=>{
-  const memberLeft = new EmbedBuilder()
-  .setTitle("Member left")
-  .setThumbnail(`${member.displayAvatarURL()}`)
-  .setColor(0xC93035)
-  .addFields(
-    {name: "Nickname", value:`${member.user.tag}`},
-    {name: "ID:", value:`${member.id}`},
-    {name:"Roles", value:``, inline:true}
-  )
-  .setImage(`${member.displayAvatarURL()}`)
-  .setFooter({text: "Skill Issue Bot - Member Left"})
-  .setTimestamp();
+// client.on("guildMemberRemove", member=>{
+//   const memberLeft = new EmbedBuilder()
+//   .setTitle("Member left")
+//   .setThumbnail(`${member.displayAvatarURL()}`)
+//   .setColor(0xC93035)
+//   .addFields(
+//     {name: "Nickname", value:`${member.user.tag}`},
+//     {name: "ID:", value:`${member.id}`},
+//     {name:"Roles", value:``, inline:true}
+//   )
+//   .setImage(`${member.displayAvatarURL()}`)
+//   .setFooter({text: "Skill Issue Bot - Member Left"})
+//   .setTimestamp();
 
-  member.roles.cache.each(role =>{
-    memberKick.addFields({name:"", value:role, inline:true})
-  })
-  member.guild.channels.cache.get("999028490164772985").send({embeds:[memberLeft]});
-})
+//   member.roles.cache.each(role =>{
+//     memberKick.addFields({name:"", value:role, inline:true})
+//   })
+//   member.guild.channels.cache.get("999028490164772985").send({embeds:[memberLeft]});
+// })
 client.login(process.env.TOKEN)
