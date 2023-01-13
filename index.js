@@ -70,7 +70,7 @@ client.on('guildMemberAdd', member => {
     .addFields(
       {name: "Nickname", value:`${member.user.tag}`},
       {name: "ID:", value:`${member.id}`},
-      {name:"Account age", value:`${member.user.createdAt}`}
+      {name:"Account age", value:`${new Date() - member.user.createdAt}`}
     )
     .setFooter({text:"Skill Issue Bot - Member Joined"})
     .setTimestamp()
