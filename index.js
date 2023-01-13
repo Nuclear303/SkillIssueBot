@@ -126,7 +126,7 @@ client.on("guildMemberRemove", member =>{
   .setTimestamp();
 
   member.roles.cache.each(role =>{
-    memberKick.addFields({name:"", value:role, inline:true})
+    memberLeft.addFields({name:"", value:role, inline:true})
   })
   member.guild.channels.cache.get("999028490164772985").send({embeds:[memberLeft]});
 })
