@@ -2,6 +2,7 @@ require('dotenv').config();
 const {REST} = require("@discordjs/rest");
 const {Routes} = require("discord-api-types/v9");
 const {  Client, IntentsBitField, Collection, EmbedBuilder } = require("discord.js");
+const {KickDMEmbed} = require("./embeds/embeds");
 const path = require("path");
 const fs = require("fs");
 const client = new Client({
@@ -61,6 +62,21 @@ client.on("interactionCreate", async interaction => {
 });
 
 client.on('guildMemberAdd', member => {
+  member.guild.channels.cache.get("999028490164772985").send({embeds:[
+    new EmbedBuilder()
+    .setTitle("Member joined")
+    .setThumbnail(`${member.displayAvatarURL()}`)
+    .setColor(0x166AFC)
+    .addFields(
+      {name: "Nickname", value:`${member.user.tag}`},
+      {name: "ID:", value:`${member.id}`},
+      {name:"Account age", value:`${member.user.createdAt}`}
+    )
+    .setImage(`${member.displayAvatarURL()}`)
+    .setFooter("Skill Issue Bot - Member Joined")
+    .setTimestamp()
+  ]});
+
   const defaults = ["https://cdn.discordapp.com/embed/avatars/0.png","https://cdn.discordapp.com/embed/avatars/1.png","https://cdn.discordapp.com/embed/avatars/2.png", "https://cdn.discordapp.com/embed/avatars/3.png","https://cdn.discordapp.com/embed/avatars/4.png" ,"https://cdn.discordapp.com/embed/avatars/5.png"];
   if(defaults.includes(String(member.displayAvatarURL()))){
     const messageEmbed = new EmbedBuilder()
@@ -72,21 +88,12 @@ client.on('guildMemberAdd', member => {
     .setImage(`${member.displayAvatarURL()}`)
     .setTimestamp()
     .setFooter({text:"Skill Issue Bot"});
-    
-    
-    const dmEmbed = new EmbedBuilder()
-    .setColor(0xFF0000)
-    .setTitle("You got kicked")
-    .addFields({name: "Reason:", value:"Default profile picture (Safety measure)"},
-    {name: "What can I do?", value:"Please change your profile picture and you'll be more than welcome to join!"},
-    {name:"Why do you do that?", value:"It's a bot prevention mechanism"})
-    .setTimestamp()
-    .setFooter({text:"Skill Issue Bot"});
+
     var tries = 0;
     const sendDM = _=>{
       tries++;
       member.guild.channels.cache.get("1062081528567431218").send(`Try #${tries}`); 
-      member.send({embeds:[dmEmbed]})
+      member.send({embeds:[KickDMEmbed]})
         .then(_=>{
           console.log(`Successfully messaged ${member.user.username}`)
           member.guild.channels.cache.get("1062081528567431218").send(`Successfully sent a message to ${member.user.tag}`);
@@ -104,5 +111,25 @@ client.on('guildMemberAdd', member => {
     sendDM();
     member.kick();
   }
+})
+
+client.on("guildMemberRemove", member=>{
+  const memberLeft = new EmbedBuilder()
+  .setTitle("Member left")
+  .setThumbnail(`${member.displayAvatarURL()}`)
+  .setColor(0xC93035)
+  .addFields(
+    {name: "Nickname", value:`${member.user.tag}`},
+    {name: "ID:", value:`${member.id}`},
+    {name:"Roles", value:``, inline:true}
+  )
+  .setImage(`${member.displayAvatarURL()}`)
+  .setFooter("Skill Issue Bot - Member Left")
+  .setTimestamp();
+
+  member.roles.cache.each(role =>{
+    memberKick.addFields({name:"", value:role, inline:true})
+  })
+  member.guild.channels.cache.get("999028490164772985").send({embeds:[memberLeft]});
 })
 client.login(process.env.TOKEN)
