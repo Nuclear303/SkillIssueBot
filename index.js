@@ -62,7 +62,6 @@ client.on("interactionCreate", async interaction => {
 });
 
 client.on('guildMemberAdd', member => {
-  let date = member.user.createdAt.toDateString();
   member.guild.channels.cache.get("999028490164772985").send({embeds:[
     new EmbedBuilder()
     .setTitle("Member joined")
@@ -71,7 +70,7 @@ client.on('guildMemberAdd', member => {
     .addFields(
       {name: "Nickname", value:`${member.user.tag}`},
       {name: "ID:", value:`${member.id}`},
-      {name:"Account age", value:`${date}`}
+      {name:"Created on", value:`${member.user.createdAt.toDateString()}`}
     )
     .setFooter({text:"Skill Issue Bot - Member Joined"})
     .setTimestamp()
