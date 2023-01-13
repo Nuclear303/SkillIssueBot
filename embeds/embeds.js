@@ -1,4 +1,4 @@
-
+const {EmbedBuilder} = require("discord.js");
 const KickDMEmbed = new EmbedBuilder()
 .setColor(0xFF0000)
 .setTitle("You got kicked")
