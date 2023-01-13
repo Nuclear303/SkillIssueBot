@@ -124,7 +124,7 @@ client.on("guildMemberRemove", member=>{
     {name:"Roles", value:``, inline:true}
   )
   .setImage(`${member.displayAvatarURL()}`)
-  .setFooter("Skill Issue Bot - Member Left")
+  .setFooter({text: "Skill Issue Bot - Member Left"})
   .setTimestamp();
 
   member.roles.cache.each(role =>{
