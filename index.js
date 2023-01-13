@@ -119,14 +119,16 @@ client.on("guildMemberRemove", member =>{
   .setColor(0xC93035)
   .addFields({name: "Nickname", value:`${member.user.tag}`},
     {name: "ID:", value:`${member.id}`},
-    {name:"Roles", value:":", inline:true}
   )
   .setImage(`${member.displayAvatarURL()}`)
   .setFooter({text: "Skill Issue Bot - Member Left"})
   .setTimestamp();
   const roleCount = 1;
   member.roles.cache.each(role =>{
-    memberLeft.addFields({name:`Role #${roleCount}:`, value:`${role.name}`, inline:true})
+    if(role.name != "@everyone"){
+      memberLeft.addFields({name:`Role #${roleCount}:`, value:`${role.name}`, inline:true})
+      roleCount++;
+    }
   })
   member.guild.channels.cache.get("999028490164772985").send({embeds:[memberLeft]});
 })
