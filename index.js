@@ -123,7 +123,7 @@ client.on("guildMemberRemove", member =>{
   .setImage(`${member.displayAvatarURL()}`)
   .setFooter({text: "Skill Issue Bot - Member Left"})
   .setTimestamp();
-  const roleCount = 1;
+  let roleCount = 1;
   member.roles.cache.each(role =>{
     if(role.name != "@everyone"){
       memberLeft.addFields({name:`Role #${roleCount}:`, value:`${role.name}`, inline:true})
