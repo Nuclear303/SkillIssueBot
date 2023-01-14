@@ -128,19 +128,22 @@ client.on("guildMemberRemove", member =>{
 
 
 client.on("guildBanAdd", (member) => {
-  const banMember = new EmbedBuilder()
-  .setTitle("Member banned")
-  .setThumbnail(`${member.user.displayAvatarURL()}`)
-  .setColor(0x8b02fc)
-  .addFields({name:"Nickname", value:`${member.user.tag}`},
-  {name:"ID", value:`${member.user.id}`})
-  .setFooter({text:"Skill Issue Bot - Member Banned"})
-  .setTimestamp()
-  member.guild.channels.cache.get("999028490164772985").send(member);
-  // member.guild.bans.fetch(`${member.user.id}`).then(ban =>{console.log(mem);banMember.addFields({name:"Reason", value:`${ban.reason}`})})
-  client.channels.fetch("999028671895584848").then(channel =>{
-    channel.send({embeds:[banMember]});
-  })
+  
+  member.guild.bans.fetch(`${member.user.id}`).then(ban =>{
+    const banMember = new EmbedBuilder()
+      .setTitle("Member banned")
+      .setThumbnail(`${member.user.displayAvatarURL()}`)
+      .setColor(0x8b02fc)
+      .addFields({name:"Nickname", value:`${member.user.tag}`},
+        {name:"ID", value:`${member.user.id}`},
+        {name:"Reason", value:`${ban.reason}`})
+      .setFooter({text:"Skill Issue Bot - Member Banned"})
+      .setTimestamp();
+    client.channels.fetch("999028671895584848").then(channel =>{
+      channel.send({embeds:[banMember]});
+    }) 
+    })
+  
 });
 
 client.on("guildBanRemove", (member) => {
