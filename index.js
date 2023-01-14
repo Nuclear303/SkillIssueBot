@@ -128,6 +128,7 @@ client.on("guildMemberRemove", member =>{
 
 
 client.on("guildBanAdd", (member) => {
+  console.log("works??");
   client.channels.cache.fetch("999028671895584848").then(channel =>{
     channel.send({embeds:[new EmbedBuilder()
     .setTitle("Member banned")
@@ -143,6 +144,7 @@ client.on("guildBanAdd", (member) => {
 });
 
 client.on("guildBanRemove", (member) => {
+  console.log("works??");
   client.channels.cache.fetch("999028671895584848").then(channel =>{
     channel.send({embeds:[
       new EmbedBuilder()
@@ -156,6 +158,6 @@ client.on("guildBanRemove", (member) => {
       .setTimestamp()
     ]})
   })
-  console.log("works??");
+  
 });
 client.login(process.env.TOKEN)
