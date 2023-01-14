@@ -135,6 +135,7 @@ client.on("guildBanAdd", (member) => {
   const getReason =() =>{
     return reason;
   }
+  setReason();
   client.channels.fetch("999028671895584848").then(channel =>{
     channel.send({embeds:[new EmbedBuilder()
     .setTitle("Member banned")
