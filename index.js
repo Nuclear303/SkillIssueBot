@@ -69,7 +69,7 @@ client.on('guildMemberAdd', member => {
     .setColor(0x166AFC)
     .addFields(
       {name: "Nickname", value:`${member.user.tag}`},
-      {name: "ID:", value:`${member.id}`},
+      {name: "ID", value:`${member.id}`},
       {name:"Created on", value:`${member.user.createdAt.toDateString()}`}
     )
     .setFooter({text:"Skill Issue Bot - Member Joined"})
@@ -82,8 +82,8 @@ client.on('guildMemberAdd', member => {
     .setColor(0xFF0000)
     .setTitle("Member kicked")
     .addFields({name: "Nickname", value:`${member.user.tag}`},
-    {name: "Reason:", value:"Default profile picture"},
-    {name: "ID:", value:`${member.id}`})
+    {name: "Reason", value:"Default profile picture"},
+    {name: "ID", value:`${member.id}`})
     .setImage(`${member.displayAvatarURL()}`)
     .setTimestamp()
     .setFooter({text:"Skill Issue Bot"});
@@ -112,7 +112,7 @@ client.on("guildMemberRemove", member =>{
   .setThumbnail(`${member.displayAvatarURL()}`)
   .setColor(0xC93035)
   .addFields({name: "Nickname", value:`${member.user.tag}`},
-    {name: "ID:", value:`${member.id}`},
+    {name: "ID", value:`${member.id}`},
   )
   .setFooter({text: "Skill Issue Bot - Member Left"})
   .setTimestamp();
@@ -124,5 +124,34 @@ client.on("guildMemberRemove", member =>{
     }
   })
   member.guild.channels.cache.get("999028490164772985").send({embeds:[memberLeft]});
-})
+});
+
+
+client.on("guildBanAdd", member => {
+  member.guild.channels.cache.get("999028490164772985").send({embeds:[
+    new EmbedBuilder()
+    .setTitle("Member banned")
+    .setThumbnail(`${member.user.displayAvatarURL()}`)
+    .setColor(0x8b02fc)
+    .addFields({name:"Nickname", value:`${member.user.tag}`},
+    {name:"ID", value:`${member.user.id}`}
+    )
+    .setFooter({text:"Skill Issue Bot - Member Banned"})
+    .setTimestamp()
+  ]});
+});
+
+client.on("guildBanRemove", member => {
+  member.guild.channels.cache.get("999028490164772985").send({embeds:[
+    new EmbedBuilder()
+    .setTitle("Member unbanned")
+    .setThumbnail(`${member.user.displayAvatarURL()}`)
+    .setColor(0x00b53c)
+    .addFields({name:"Nickname", value:`${member.user.tag}`},
+    {name:"ID", value:`${member.user.id}`}
+    )
+    .setFooter({text:"Skill Issue Bot - Member unbanned"})
+    .setTimestamp()
+  ]});
+});
 client.login(process.env.TOKEN)
