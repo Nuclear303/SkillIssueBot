@@ -127,37 +127,39 @@ client.on("guildMemberRemove", member =>{
 });
 
 
-client.on("guildBanAdd", (member) => {
-  console.log("works??");
-  client.channels.cache.fetch("999028671895584848").then(channel =>{
-    channel.send({embeds:[new EmbedBuilder()
-    .setTitle("Member banned")
-    .setThumbnail(`${member.user.displayAvatarURL()}`)
-    .setColor(0x8b02fc)
-    .addFields({name:"Nickname", value:`${member.user.tag}`},
-    {name:"ID", value:`${member.user.id}`},
-    {name:"Reason", value:`${member.reason}`}
-    )
-    .setFooter({text:"Skill Issue Bot - Member Banned"})
-    .setTimestamp()
-  ]});})
+client.on("guildBanAdd", async (member) => {
+  console.log(await member.fetch());
+  // console.log("works??");
+  // client.channels.cache.fetch("999028671895584848").then(channel =>{
+  //   channel.send({embeds:[new EmbedBuilder()
+  //   .setTitle("Member banned")
+  //   .setThumbnail(`${member.user.displayAvatarURL()}`)
+  //   .setColor(0x8b02fc)
+  //   .addFields({name:"Nickname", value:`${member.user.tag}`},
+  //   {name:"ID", value:`${member.user.id}`},
+  //   {name:"Reason", value:`${member.reason}`}
+  //   )
+  //   .setFooter({text:"Skill Issue Bot - Member Banned"})
+  //   .setTimestamp()
+  // ]});})
 });
 
-client.on("guildBanRemove", (member) => {
-  console.log("works??");
-  client.channels.cache.fetch("999028671895584848").then(channel =>{
-    channel.send({embeds:[
-      new EmbedBuilder()
-      .setTitle("Member unbanned")
-      .setThumbnail(`${member.user.displayAvatarURL()}`)
-      .setColor(0x00b53c)
-      .addFields({name:"Nickname", value:`${member.user.tag}`},
-      {name:"ID", value:`${member.user.id}`}
-      )
-      .setFooter({text:"Skill Issue Bot - Member unbanned"})
-      .setTimestamp()
-    ]})
-  })
+client.on("guildBanRemove", async (member) => {
+  console.log(await member.fetch());
+  // console.log("works??");
+  // client.channels.cache.fetch("999028671895584848").then(channel =>{
+  //   channel.send({embeds:[
+  //     new EmbedBuilder()
+  //     .setTitle("Member unbanned")
+  //     .setThumbnail(`${member.user.displayAvatarURL()}`)
+  //     .setColor(0x00b53c)
+  //     .addFields({name:"Nickname", value:`${member.user.tag}`},
+  //     {name:"ID", value:`${member.user.id}`}
+  //     )
+  //     .setFooter({text:"Skill Issue Bot - Member unbanned"})
+  //     .setTimestamp()
+  //   ]})
+  // })
   
 });
 client.login(process.env.TOKEN)
