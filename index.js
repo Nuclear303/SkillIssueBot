@@ -139,6 +139,7 @@ client.on("guildBanAdd", (member) => {
     .setFooter({text:"Skill Issue Bot - Member Banned"})
     .setTimestamp()
   ]});
+  console.log("works??");
 });
 
 client.on("guildBanRemove", (member) => {
@@ -152,6 +153,7 @@ client.on("guildBanRemove", (member) => {
     )
     .setFooter({text:"Skill Issue Bot - Member unbanned"})
     .setTimestamp()
-  ]});
+  ]})
+  console.log("works??");
 });
 client.login(process.env.TOKEN)
