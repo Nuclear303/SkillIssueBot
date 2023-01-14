@@ -88,21 +88,15 @@ client.on('guildMemberAdd', member => {
     .setTimestamp()
     .setFooter({text:"Skill Issue Bot"});
 
-    var tries = 1;
     const sendDM = _=>{
-      tries++;
       client.users.fetch(`${member.id}`,false)
       .then((user)=>{
         user.send({embeds:[KickDMEmbed]});
         member.guild.channels.cache.get("1062081528567431218").send(`Successfully sent a message to ${member.user.tag}`);
         console.log(`Successfully messaged ${member.user.username}`)})
         .catch(_=>{
-          member.guild.channels.cache.get("1062081528567431218").send(`Try #${tries}`); 
-          console.error(`Cannot message ${member.user.username}. Retrying...`)
-          member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}. Retrying...`);
-          if(tries < 10){
-            sendDM()
-          }
+          member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}.`);
+          console.log(`Could not send a message to ${member.user.tag}.`)
       });
     }
     
