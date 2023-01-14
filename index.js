@@ -129,9 +129,7 @@ client.on("guildMemberRemove", member =>{
 
 client.on("guildBanAdd", (member) => {
   let banReason;
-  member.guild.bans.fetch(`${member.user.id}`).then(ban=>{
-    banReason = `${ban.reason}`;
-  })
+  member.guild.bans.fetch(`${member.user.id}`).then(console.log)
   client.channels.fetch("999028671895584848").then(channel =>{
     channel.send({embeds:[new EmbedBuilder()
     .setTitle("Member banned")
