@@ -128,7 +128,7 @@ client.on("guildMemberRemove", member =>{
 
 
 client.on("guildBanAdd", member => {
-  member.guild.channels.cache.get("999028490164772985").send({embeds:[
+  member.guild.channels.cache.get("999028671895584848").send({embeds:[
     new EmbedBuilder()
     .setTitle("Member banned")
     .setThumbnail(`${member.user.displayAvatarURL()}`)
@@ -142,7 +142,7 @@ client.on("guildBanAdd", member => {
 });
 
 client.on("guildBanRemove", member => {
-  member.guild.channels.cache.get("999028490164772985").send({embeds:[
+  member.guild.channels.cache.get("999028671895584848").send({embeds:[
     new EmbedBuilder()
     .setTitle("Member unbanned")
     .setThumbnail(`${member.user.displayAvatarURL()}`)
