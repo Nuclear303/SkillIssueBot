@@ -136,7 +136,7 @@ client.on("guildBanAdd", (member) => {
   {name:"ID", value:`${member.user.id}`})
   .setFooter({text:"Skill Issue Bot - Member Banned"})
   .setTimestamp()
-
+  
   member.guild.bans.fetch(`${member.user.id}`).then(ban =>{banMember.addFields({name:"Reason", value:`${ban.reason}`})})
   client.channels.fetch("999028671895584848").then(channel =>{
     channel.send({embeds:[banMember]});
@@ -144,7 +144,6 @@ client.on("guildBanAdd", (member) => {
 });
 
 client.on("guildBanRemove", (member) => {
-  member.client.channels.cache.get
   client.channels.fetch("999028671895584848", false).then(channel =>{
     channel.send({embeds:[
       new EmbedBuilder()
