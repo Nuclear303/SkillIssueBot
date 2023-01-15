@@ -230,6 +230,7 @@ const yes = () => client.on("guildMemberUpdate", (oldM, newM) =>{
     })
   }
 })
+yes()
 
 client.on("roleCreate", role =>{
   client.channels.fetch("1046424601615405056", false).then(log =>{
