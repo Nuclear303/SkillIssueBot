@@ -6,6 +6,7 @@ const {KickDMEmbed} = require("./embeds/embeds");
 const path = require("path");
 const fs = require("fs");
 const { ButtonBuilder, ActionRowBuilder } = require('@discordjs/builders');
+const { channel } = require('diagnostics_channel');
 const client = new Client({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildBans]
 });
@@ -179,4 +180,60 @@ client.on("guildBanRemove", (member) => {
     ]})
   }) 
 });
+
+client.on("channelCreate", channel =>{
+  client.channels.fetch("1046424601615405056", false).then(log =>{
+    log.send({embeds:[
+      new EmbedBuilder()
+        .setTitle("Channel Created")
+        .addFields({name:"Name", value:`#${channel.name}`},
+        {name:"Channel ID", value:`${channel.id}`})
+        .setColor(0x0796fc)
+        .setFooter({text:"Skill Issue Bot - Channel Created"})
+        .setTimestamp()
+    ]})
+  })
+});
+
+client.on("channelDelete", channel =>{
+  client.channels.fetch("1046424601615405056", false).then(log =>{
+    log.send({embeds:[
+      new EmbedBuilder()
+        .setTitle("Channel Deleted")
+        .addFields({name:"Name", value:`#${channel.name}`},
+        {name:"Channel ID", value:`${channel.id}`})
+        .setColor(0xfc3807)
+        .setFooter({text:"Skill Issue Bot - Channel Deleted"})
+        .setTimestamp()
+    ]})
+  })
+});
+
+client.on("roleCreate", role =>{
+  client.channels.fetch("1046424601615405056", false).then(log =>{
+    log.send({embeds:[
+      new EmbedBuilder()
+        .setTitle("Role Created")
+        .addFields({name:"Name", value:`#${role.name}`},
+        {name:"Role ID", value:`${role.id}`})
+        .setColor(0x0796fc)
+        .setFooter({text:"Skill Issue Bot - Role Created"})
+        .setTimestamp()
+    ]})
+  })
+})
+
+client.on("roleDelete", role =>{
+  client.channels.fetch("1046424601615405056", false).then(log =>{
+    log.send({embeds:[
+      new EmbedBuilder()
+        .setTitle("Role Deleted")
+        .addFields({name:"Name", value:`#${role.name}`},
+        {name:"Role ID", value:`${role.id}`})
+        .setColor(0xfc3807)
+        .setFooter({text:"Skill Issue Bot - Role Deleted"})
+        .setTimestamp()
+    ]})
+  })
+})
 client.login(process.env.TOKEN)
