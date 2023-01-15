@@ -210,18 +210,18 @@ client.on("channelDelete", channel =>{
 });
 
 client.on("guildMemberUpdate", (oldM, newM) =>{
-  console.log(oldM.nickname);
-  console.log(newM.nickname);
   if(oldM.nickname != newM.nickname){
     client.channels.fetch("999028490164772985", false).then(log =>{
       log.send({embeds:[
         new EmbedBuilder()
           .setTitle("Nickname Changed")
-          .addFields({name:"Old nickname", value:`${oldM.nickname ?? "No nickname"}`},
+          .addFields({name:"Username", value:`${oldM.user.tag}`},
+          {name:"Old nickname", value:`${oldM.nickname ?? "No nickname"}`},
           {name:"New nickname", value:`${newM.nickname ?? "No nickname"}`},
           {name:"User ID", value:`${newM.id}`})
           .setColor(0x0796fc)
           .setFooter({text:"Skill Issue Bot - NicknameChanged"})
+          .setThumbnail(`${newM.displayAvatarURL()}`)
           .setTimestamp()
       ]})
     })
