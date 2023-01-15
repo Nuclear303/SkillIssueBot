@@ -210,6 +210,8 @@ client.on("channelDelete", channel =>{
 });
 
 client.on("guildMemberUpdate", (oldM, newM) =>{
+  console.log(oldM.nickname);
+  console.log(newM.nickname);
   if(oldM.nickname != newM.nickname){
     client.channels.fetch("999028490164772985", false).then(log =>{
       log.send({embeds:[
