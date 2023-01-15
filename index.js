@@ -208,11 +208,7 @@ client.on("channelDelete", channel =>{
     ]})
   })
 });
-
-const yes = () => client.on("guildMemberUpdate", (oldM, newM) =>{
-  if(oldM.nickname == null && newM.nickname == null){
-    yes()
-  }
+client.on("guildMemberUpdate", (oldM, newM) =>{
   if(oldM.user != newM.nickname){
     client.channels.fetch("999028490164772985", false).then(log =>{
       log.send({embeds:[
@@ -230,7 +226,6 @@ const yes = () => client.on("guildMemberUpdate", (oldM, newM) =>{
     })
   }
 })
-yes()
 
 client.on("roleCreate", role =>{
   client.channels.fetch("1046424601615405056", false).then(log =>{
