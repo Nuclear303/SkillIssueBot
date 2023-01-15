@@ -24,6 +24,9 @@ for (const file of commandFiles) {
     commands.push(command.data.toJSON());
 }
 client.on("ready", _=>{
+  client.guilds.fetch("735871800730189916", false).then(guild=>{
+    guild.members.fetch();
+  })
   const guild_ids = client.guilds.cache.map(guild => guild.id);
 
   const rest = new REST({version: '9'}).setToken(process.env.TOKEN)
