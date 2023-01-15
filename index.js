@@ -1,10 +1,11 @@
 require('dotenv').config();
 const {REST} = require("@discordjs/rest");
 const {Routes} = require("discord-api-types/v9");
-const {  Client, IntentsBitField, Collection, EmbedBuilder } = require("discord.js");
+const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle } = require("discord.js");
 const {KickDMEmbed} = require("./embeds/embeds");
 const path = require("path");
 const fs = require("fs");
+const { ButtonBuilder, ActionRowBuilder } = require('@discordjs/builders');
 const client = new Client({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildBans]
 });
@@ -36,7 +37,15 @@ client.on("ready", _=>{
 })
 
 client.on("interactionCreate", async interaction => {
-    if(!interaction.isCommand()) return;
+    if(!interaction.isCommand() && !interaction.isButton()) return;
+
+    if(interaction.isButton()){
+      const customId = interaction.customId.split(" ");
+      if(customId[0] === "unban"){
+        const id = customId[1]
+        interaction.guild.members.unban(`${id}`);
+      }
+    }
 
     const command = client.commands.get(interaction.commandName);
     if(!command) return;
@@ -139,8 +148,16 @@ client.on("guildBanAdd", (member) => {
         {name:"Reason", value:`${ban.reason}`})
       .setFooter({text:"Skill Issue Bot - Member Banned"})
       .setTimestamp();
+
+    const unbanButton = new ActionRowBuilder()
+    .addComponents(
+      new ButtonBuilder()
+        .setCustomId(`unban ${member.user.id}`)
+        .setLabel("Unban")
+        .setStyle(ButtonStyle.Danger)
+    );
     client.channels.fetch("999028671895584848").then(channel =>{
-      channel.send({embeds:[banMember]});
+      channel.send({embeds:[banMember],components:[unbanButton]});
     }) 
     })
   
