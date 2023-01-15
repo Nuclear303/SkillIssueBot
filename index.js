@@ -44,7 +44,7 @@ client.on("interactionCreate", async interaction => {
       if(customId[0] === "unban"){
         const id = customId[1]
         interaction.guild.members.unban(`${id}`);
-        interaction.deferReply()
+        interaction.reply(`Successfully unbanned @${id}`)
       }
     }
 
