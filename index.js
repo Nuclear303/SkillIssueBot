@@ -211,7 +211,7 @@ client.on("channelDelete", channel =>{
 
 client.on("guildMemberUpdate", (oldM, newM) =>{
   if(oldM.nickname != newM.nickname){
-    client.channels.fetch("1046424601615405056", false).then(log =>{
+    client.channels.fetch("999028490164772985", false).then(log =>{
       log.send({embeds:[
         new EmbedBuilder()
           .setTitle("Nickname Changed")
