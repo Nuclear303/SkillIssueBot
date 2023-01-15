@@ -209,6 +209,23 @@ client.on("channelDelete", channel =>{
   })
 });
 
+client.on("guildMemberUpdate", (oldM, newM) =>{
+  if(oldM.nickname != newM.nickname){
+    client.channels.fetch("1046424601615405056", false).then(log =>{
+      log.send({embeds:[
+        new EmbedBuilder()
+          .setTitle("Nickname Changed")
+          .addFields({name:"Old nickname", value:`#${oldM.nickname ?? "No nickname"}`},
+          {name:"New nickname", value:`${newM.nickname}`},
+          {name:"User ID", value:`${newM.id}`})
+          .setColor(0x0796fc)
+          .setFooter({text:"Skill Issue Bot - NicknameChanged"})
+          .setTimestamp()
+      ]})
+    })
+  }
+})
+
 client.on("roleCreate", role =>{
   client.channels.fetch("1046424601615405056", false).then(log =>{
     log.send({embeds:[
