@@ -215,8 +215,8 @@ client.on("guildMemberUpdate", (oldM, newM) =>{
       log.send({embeds:[
         new EmbedBuilder()
           .setTitle("Nickname Changed")
-          .addFields({name:"Old nickname", value:`${"#"+oldM.nickname ?? "No nickname"}`},
-          {name:"New nickname", value:`${newM.nickname}`},
+          .addFields({name:"Old nickname", value:`${oldM.nickname ?? "No nickname"}`},
+          {name:"New nickname", value:`${newM.nickname ?? "No nickname"}`},
           {name:"User ID", value:`${newM.id}`})
           .setColor(0x0796fc)
           .setFooter({text:"Skill Issue Bot - NicknameChanged"})
