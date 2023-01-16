@@ -102,8 +102,8 @@ client.on('guildMemberAdd', member => {
     .setTimestamp()
     .setFooter({text:"Skill Issue Bot"});
 
-    const sendDM = _=>{
-      client.users.fetch(`${member.id}`,false)
+    member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
+    client.users.fetch(`${member.id}`,false)
       .then((user)=>{
         user.send({embeds:[KickDMEmbed]}).then(_=>{
           member.guild.channels.cache.get("1062081528567431218").send(`Successfully sent a message to ${member.user.tag}`);
@@ -117,15 +117,6 @@ client.on('guildMemberAdd', member => {
           member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}.`);
           console.log(`Could not send a message to ${member.user.tag}.`)
       });
-    }
-    
-    member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
-    try{
-      sendDM();
-    }  
-    catch(err){
-
-    }
     member.kick();
   }
 })
