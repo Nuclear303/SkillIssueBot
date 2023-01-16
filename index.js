@@ -105,15 +105,19 @@ client.on('guildMemberAdd', member => {
     member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
     client.users.fetch(`${member.id}`,false)
       .then((user)=>{
-        user.send({embeds:[KickDMEmbed]});
-        member.guild.channels.cache.get("1062081528567431218").send(`Successfully sent a message to ${member.user.tag}`);
-        console.log(`Successfully messaged ${member.user.username}`);
+        user.send({embeds:[KickDMEmbed]}).then(_=>{
+          member.guild.channels.cache.get("1062081528567431218").send(`Successfully sent a message to ${member.user.tag}`);
+          console.log(`Successfully messaged ${member.user.username}`)})
+          .catch(_=>{
+            member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}.`);
+            console.log(`Could not send a message to ${member.user.tag}.`)
+        });
         })
         .catch(_=>{
           member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}.`);
           console.log(`Could not send a message to ${member.user.tag}.`)
       });
-    // member.kick();
+    member.kick();
   }
 })
 
