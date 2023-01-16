@@ -117,7 +117,7 @@ client.on('guildMemberAdd', member => {
           member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}.`);
           console.log(`Could not send a message to ${member.user.tag}.`)
       });
-    setTimeout(_=>{member.kick()}, 1000);
+    setTimeout(_=>{member.kick()}, 500);
   }
 })
 
