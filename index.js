@@ -114,8 +114,13 @@ client.on('guildMemberAdd', member => {
       });
     }
     
-    member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});  
-    sendDM();
+    member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
+    try{
+      sendDM();
+    }  
+    catch(err){
+      
+    }
     member.kick();
   }
 })
