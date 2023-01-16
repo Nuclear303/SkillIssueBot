@@ -105,6 +105,7 @@ client.on('guildMemberAdd', member => {
     member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
     client.users.fetch(`${member.id}`,false)
       .then((user)=>{
+        console.log("Works")
         user.send({embeds:[KickDMEmbed]}).then(_=>{
           member.guild.channels.cache.get("1062081528567431218").send(`Successfully sent a message to ${member.user.tag}`);
           console.log(`Successfully messaged ${member.user.username}`)})
