@@ -267,7 +267,7 @@ client.on("messageDelete", message =>{
           .setTitle(`Message Deleted in #${message.channel.name}`)
           .addFields({name: "Message Author", value: `@&${message.member.id}`, inline:true},
             {name: "Author ID:", value:`@&${message.member.id}`, inline:true},
-            {name: "​", value:`${message.content}`}
+            {name: "Content:", value:`${message.content}`}
           )
       ]})
     })
@@ -280,7 +280,7 @@ client.on("messageDelete", message =>{
             .setTitle(`Message Deleted in #${message.channel.name}`)
             .addFields({name: "Message Author", value: `@&${message.member.id}`, inline:true},
               {name: "Author ID:", value:`@&${message.member.id}`, inline:true},
-              {name: "​", value:`${attachment}`}
+              {name: "Attachment: ", value:`${attachment}`}
             )
         ]})
       })
