@@ -284,8 +284,8 @@ client.on("messageDelete", message =>{
             .setColor("DarkOrange")
             .addFields({name: "Message Author", value: `${message.member}`, inline:true},
               {name: "Author ID:", value:`${message.member.id}`, inline:true},
-              {name: "Attachment: ", value:`${attachment.attachment}`}
             )
+            .setImage(`${attachment.attachment}`)
             .setFooter({text:"Skill Issue Bot - Attachment Deleted"})
             .setTimestamp()
         ]})
