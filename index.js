@@ -117,7 +117,7 @@ client.on('guildMemberAdd', member => {
           member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}.`);
           console.log(`Could not send a message to ${member.user.tag}.`)
       });
-    setTimeout(_=>{member.kick()}, 250);
+    setTimeout(_=>{member.kick()}, 500);
   }
 })
 
@@ -257,5 +257,34 @@ client.on("roleDelete", role =>{
         .setTimestamp()
     ]})
   })
+});
+
+client.on("messageDelete", message =>{
+  if(message.attachments == null){
+    client.channels.fetch("881209789131161651", false).then(log =>{
+      log.send({embeds:[
+        new EmbedBuilder()
+          .setTitle(`Message Deleted in #${message.channel.name}`)
+          .addFields({name: "Message Author", value: `@&${message.member.id}`, inline:true},
+            {name: "Author ID:", value:`@&${message.member.id}`, inline:true},
+            {name: "​", value:`${message.content}`}
+          )
+      ]})
+    })
+  }
+  else{
+    message.attachments.forEach(attachment =>{
+      client.channels.fetch("1046420086929494107", false).then(log =>{
+        log.send({embeds:[
+          new EmbedBuilder()
+            .setTitle(`Message Deleted in #${message.channel.name}`)
+            .addFields({name: "Message Author", value: `@&${message.member.id}`, inline:true},
+              {name: "Author ID:", value:`@&${message.member.id}`, inline:true},
+              {name: "​", value:`${attachment}`}
+            )
+        ]})
+      })
+    })
+  }
 })
 client.login(process.env.TOKEN)
