@@ -261,7 +261,7 @@ client.on("roleDelete", role =>{
 
 client.on("messageDelete", message =>{
   console.log("here")
-  if(message.attachments == null){
+  if(message.attachments.size == 0){
     client.channels.fetch("881209789131161651", false).then(log =>{
       log.send({embeds:[
         new EmbedBuilder()
