@@ -262,16 +262,15 @@ client.on("roleDelete", role =>{
 client.on("messageDelete", message =>{
   if(message.attachments.size == 0){
     client.channels.fetch("881209789131161651", false).then(log =>{
-      log.send({embeds:[
+      log.send({embeds: [
         new EmbedBuilder()
-          .setTitle(`Message Deleted in #${message.channel.name}`)
-          .setColor(0xa03d13)
-          .addFields({name: "Message Author", value: `${message.member}`},
-            {name: "Author ID:", value:`${message.member.id}`},
-            {name: "Content:", value:`${message.content}`}
-          )
-          .setFooter({text:"Skill Issue Bot - Message Deleted"})
-          .setTimestamp()
+        .setTitle(`Message Deleted in #${message.channel.name}`)
+        .setColor(0xa03d13)
+        .setFooter({text: "Skill Issue Bot - Message Deleted"})
+        .addFields({name: "Message Author", value: `${message.member}`, inline:true},
+        {name: "Author ID:", value:`${message.member.id}`, inline:true},
+        {name: "Message content", value:`${message.content}`})
+        .setTimestamp()
       ]})
     })
   }
@@ -283,7 +282,7 @@ client.on("messageDelete", message =>{
             .setTitle(`Message Deleted in #${message.channel.name}`)
             .setColor(0xa03d13)
             .addFields({name: "Message Author", value: `${message.member}`, inline:true},
-              {name: "Author ID:", value:`${message.member.id}`, inline:true},
+              {name: "Author ID:", value:`${message.member.id}`, inline:true}
             )
             .setImage(`${attachment.attachment}`)
             .setFooter({text:"Skill Issue Bot - Attachment Deleted"})
