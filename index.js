@@ -289,7 +289,7 @@ client.on("messageDelete", message =>{
             .setFooter({text:"Skill Issue Bot - Attachment Deleted"})
             .setTimestamp()
         ]})
-        console.log(attachment.attachment.split('.')[-1])
+        console.log(attachment.attachment.split('.'))
       })
     })
   }
