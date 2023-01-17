@@ -289,7 +289,10 @@ client.on("messageDelete", message =>{
             .setFooter({text:"Skill Issue Bot - Attachment Deleted"})
             .setTimestamp()
         ]})
-        console.log(attachment.attachment.split('.')[attachment.attachment.length - 1])
+        const extension = attachment.attachment.split('.')[3];
+        if(extension == "mp4" || extension == "webm" || extension == "avi" || extension == "mkv"){
+          log.send(attachment.attachment);
+        }
       })
     })
   }
