@@ -260,13 +260,12 @@ client.on("roleDelete", role =>{
 });
 
 client.on("messageDelete", message =>{
-  console.log("here")
   if(message.attachments.size == 0){
     client.channels.fetch("881209789131161651", false).then(log =>{
       log.send({embeds:[
         new EmbedBuilder()
           .setTitle(`Message Deleted in #${message.channel.name}`)
-          .addFields({name: "Message Author", value: `@&${message.member.id}`, inline:true},
+          .addFields({name: "Message Author", value: `@&${message.member}`, inline:true},
             {name: "Author ID:", value:`@&${message.member.id}`, inline:true},
             {name: "Content:", value:`${message.content}`}
           )
