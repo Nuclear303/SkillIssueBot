@@ -265,9 +265,9 @@ client.on("messageDelete", message =>{
       log.send({embeds:[
         new EmbedBuilder()
           .setTitle(`Message Deleted in #${message.channel.name}`)
-          .setColor("DarkOrange")
-          .addFields({name: "Message Author", value: `${message.member}`, inline:true},
-            {name: "Author ID:", value:`${message.member.id}`, inline:true},
+          .setColor(0xa03d13)
+          .addFields({name: "Message Author", value: `${message.member}`},
+            {name: "Author ID:", value:`${message.member.id}`},
             {name: "Content:", value:`${message.content}`}
           )
           .setFooter({text:"Skill Issue Bot - Message Deleted"})
@@ -281,7 +281,7 @@ client.on("messageDelete", message =>{
         log.send({embeds:[
           new EmbedBuilder()
             .setTitle(`Message Deleted in #${message.channel.name}`)
-            .setColor("DarkOrange")
+            .setColor(0xa03d13)
             .addFields({name: "Message Author", value: `${message.member}`, inline:true},
               {name: "Author ID:", value:`${message.member.id}`, inline:true},
             )
@@ -289,7 +289,7 @@ client.on("messageDelete", message =>{
             .setFooter({text:"Skill Issue Bot - Attachment Deleted"})
             .setTimestamp()
         ]})
-        console.log(attachment.attachment.split('.'))
+        console.log(attachment.attachment.split('.')[attachment.attachment.length - 1])
       })
     })
   }
