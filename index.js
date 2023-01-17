@@ -279,8 +279,8 @@ client.on("messageDelete", message =>{
         log.send({embeds:[
           new EmbedBuilder()
             .setTitle(`Message Deleted in #${message.channel.name}`)
-            .addFields({name: "Message Author", value: `@&${message.member.id}`, inline:true},
-              {name: "Author ID:", value:`@&${message.member.id}`, inline:true},
+            .addFields({name: "Message Author", value: `@&${message.member}`, inline:true},
+              {name: "Author ID:", value:`${message.member.id}`, inline:true},
               {name: "Attachment: ", value:`${attachment}`}
             )
         ]})
