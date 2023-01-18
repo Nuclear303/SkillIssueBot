@@ -231,8 +231,7 @@ client.on("guildMemberUpdate", (oldM, newM) =>{
   }
   const guild = client.guilds.cache.get("735871800730189916");
   const member = guild.members.cache.get(`${newM.user.id}`);
-  console.table([member.roles.cache.has("1055518589488214026"), (member.roles.cache.has("998674829513347082") || member.roles.cache.has("998674942650490940") || member.roles.cache.has("998675147168948234") || member.roles.cache.has("1048555345573847080") || member.roles.cache.has("998675476270825492") || member.roles.cache.has("998675824129605632") || member.roles.cache.has("998675941712724159") || member.roles.cache.has("1048551330890924073"))])
-  if(member.roles.cache.has("1055518589488214026") && (member.roles.cache.has("998674829513347082") || member.roles.cache.has("998674942650490940") || member.roles.cache.has("998675147168948234") || member.roles.cache.has("1048555345573847080") || member.roles.cache.has("998675476270825492") || member.roles.cache.has("998675824129605632") || member.roles.cache.has("998675941712724159") || member.roles.cache.has("1048551330890924073")) ){
+  if(oldM.roles.cache.has("1055518589488214026") && (newM.roles.cache.has("998674829513347082") || member.roles.cache.has("998674942650490940") || member.roles.cache.has("998675147168948234") || member.roles.cache.has("1048555345573847080") || member.roles.cache.has("998675476270825492") || member.roles.cache.has("998675824129605632") || member.roles.cache.has("998675941712724159") || member.roles.cache.has("1048551330890924073")) ){
     member.roles.remove("1055518589488214026");
   }
 })
