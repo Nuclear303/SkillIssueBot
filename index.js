@@ -6,7 +6,6 @@ const {KickDMEmbed} = require("./embeds/embeds");
 const path = require("path");
 const fs = require("fs");
 const { ButtonBuilder, ActionRowBuilder } = require('@discordjs/builders');
-const { channel } = require('diagnostics_channel');
 const client = new Client({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildBans, IntentsBitField.Flags.MessageContent]
 });
@@ -213,6 +212,7 @@ client.on("channelDelete", channel =>{
   })
 });
 client.on("guildMemberUpdate", (oldM, newM) =>{
+  
   if(oldM.nickname != newM.nickname){
     client.channels.fetch("999028490164772985", false).then(log =>{
       log.send({embeds:[
@@ -228,6 +228,9 @@ client.on("guildMemberUpdate", (oldM, newM) =>{
           .setTimestamp()
       ]})
     })
+  }
+  if(oldM.roles.cache.has("1055518589488214026") && newM.roles.cache.hasAny(["998674829513347082", "998674942650490940", "998675147168948234", "1048555345573847080", "998675476270825492", "998675824129605632", "998675941712724159", "1048551330890924073"]) ){
+    newM.roles.remove("1055518589488214026");
   }
 })
 
