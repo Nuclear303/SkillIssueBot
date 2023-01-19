@@ -4,12 +4,12 @@ module.exports = {
   data: new SlashCommandBuilder()
   .setName('apply')
   .setDescription("Sends an application to one of our squadrons")
-  .addStringOption((option)=>{
-    option
-    .setName('ign')
-    .setDescription('Your in-game nickname')
-    .setRequired(true)
-  })
+  // .addStringOption((option)=>{
+  //   option
+  //   .setName('ign')
+  //   .setDescription('Your in-game nickname')
+  //   .setRequired(true)
+  // })
   .addStringOption((option)=>{
     option
     .setName('squadron')
