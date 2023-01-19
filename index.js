@@ -61,6 +61,7 @@ client.on("interactionCreate", async interaction => {
         const id = customId[1];
         const squadron = interaction.options.getString("squadron");
         interaction.guild.members.cache.get(id).roles.add(squadronRole[squadron]);
+        interaction.reply(`Accepted user`);
       }
     }
 
