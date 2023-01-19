@@ -37,7 +37,7 @@ module.exports = {
     await interaction.guild.channels.cache.get("1065586057065807952").send({content: "New application",
     embeds:[
       new EmbedBuilder()
-      .setTitle(`${interaction.guild.members.cache.get(interaction.user.id).nickname} sent an application`)
+      .setTitle(`${interaction.guild.members.cache.get(interaction.user.id).nickname ?? interaction.user.username} sent an application`)
       .setColor(0x00fc15)
         .addFields({name:"IGN", value:`${interaction.options.getString('ign')}`},
         {name:"Squadron", value:`${interaction.options.getString("squadron")}`})
