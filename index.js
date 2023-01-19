@@ -67,6 +67,9 @@ client.on("interactionCreate", async interaction => {
         if(interaction.channel.id != "998709525911707679"){
           return interaction.reply({content: `You can only use this command in <#998709525911707679> !`, ephemeral:true})
         }
+        else if(!(interaction.member.roles.cache.has("998674829513347082") || interaction.member.roles.cache.has("998674942650490940") || interaction.member.roles.cache.has("998675147168948234") || interaction.member.roles.cache.has("1048555345573847080"))){
+          return interaction.reply({content: `You can't apply without a pending verification role! Get one from <#894445518573404230>`, ephemeral:true})
+        }
         else{
           await command.execute(interaction)
         }
