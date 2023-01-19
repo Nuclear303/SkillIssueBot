@@ -18,6 +18,12 @@ const squadronRole = {
   "Mlky": "998675941712724159",
   "BNTY": "1048551330890924073"
 }
+const pendingRole = {
+  "Twix": "998674829513347082",
+  "Marz": "998674942650490940",
+  "Mlky": "998675147168948234",
+  "BNTY": "1048555345573847080"
+}
 
 const commands = [];
 client.commands = new Collection();
@@ -109,6 +115,9 @@ client.on("interactionCreate", async interaction => {
         }
         else if(!(interaction.options.getString('ign') == interaction.guild.members.cache.get(interaction.user.id).nickname)){
           return interaction.reply({content: `Your nickname doesn't match the provided IGN! Please change it!`, ephemeral:true})
+        }
+        else if(interaction.member.roles.cache.has(pendingRole[interaction.options.getString('ign')])){
+          return interaction.reply({content: `Squadron you mentioned in your application doesn't match your Pending Role!`, ephemeral:true})
         }
         else{
           await command.execute(interaction)
