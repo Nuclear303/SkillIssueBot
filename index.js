@@ -234,6 +234,19 @@ client.on("guildMemberUpdate", (oldM, newM) =>{
   if(oldM.roles.cache.has("1055518589488214026") && (newM.roles.cache.has("998674829513347082") || member.roles.cache.has("998674942650490940") || member.roles.cache.has("998675147168948234") || member.roles.cache.has("1048555345573847080") || member.roles.cache.has("998675476270825492") || member.roles.cache.has("998675824129605632") || member.roles.cache.has("998675941712724159") || member.roles.cache.has("1048551330890924073")) ){
     member.roles.remove("1055518589488214026");
   }
+
+  if(member.roles.cache.has("998674829513347082") && (member.roles.cache.has("998675476270825492") || member.roles.cache.has("998675824129605632") || member.roles.cache.has("998675941712724159") || member.roles.cache.has("1048551330890924073"))){
+    member.roles.remove("998674829513347082");
+  }
+  else if(member.roles.cache.has("998674942650490940") && (member.roles.cache.has("998675476270825492") || member.roles.cache.has("998675824129605632") || member.roles.cache.has("998675941712724159") || member.roles.cache.has("1048551330890924073"))){
+    member.roles.remove("998674942650490940");
+  }
+  else if(member.roles.cache.has("998675147168948234") && (member.roles.cache.has("998675476270825492") || member.roles.cache.has("998675824129605632") || member.roles.cache.has("998675941712724159") || member.roles.cache.has("1048551330890924073"))){
+    member.roles.remove("998675147168948234");
+  }
+  else if(member.roles.cache.has("1048555345573847080") && (member.roles.cache.has("998675476270825492") || member.roles.cache.has("998675824129605632") || member.roles.cache.has("998675941712724159") || member.roles.cache.has("1048551330890924073"))){
+    member.roles.remove("1048555345573847080");
+  }
 })
 
 client.on("roleCreate", role =>{
