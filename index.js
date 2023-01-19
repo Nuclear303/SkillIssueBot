@@ -65,7 +65,7 @@ client.on("interactionCreate", async interaction => {
       }
       else if(command.data.name === 'apply'){
         if(interaction.channel.id != "998709525911707679"){
-          return interaction.reply({content: "You can only use this command in #✅get-verified-here !", ephemeral:true})
+          return interaction.reply({content: `You can only use this command in <#998709525911707679> !`, ephemeral:true})
         }
         else{
           await command.execute(interaction)
