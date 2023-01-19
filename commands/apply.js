@@ -1,5 +1,5 @@
 const { SlashCommandBuilder} = require("@discordjs/builders");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, Application } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -33,5 +33,15 @@ module.exports = {
         .setFooter({text:"Skill Issue Bot - Application Sent"})
         .setTimestamp()
       ]});
+
+    await interaction.guild.channels.cache.get("1065586057065807952").send({content: "New application", embeds:[
+      new EmbedBuilder()
+      .setTitle(`${interaction.guild.members.get(interaction.user.id).nickname} sent an application`)
+      .setColor(0x00fc15)
+        .addFields({name:"IGN", value:`${interaction.options.getString('ign')}`},
+        {name:"Squadron", value:`${interaction.options.getString("squadron")}`})
+        .setFooter({text:"Skill Issue Bot - Application Sent"})
+        .setTimestamp()
+    ]})
   }
 }
