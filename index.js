@@ -1,7 +1,7 @@
 require('dotenv').config();
 const {REST} = require("@discordjs/rest");
 const {Routes} = require("discord-api-types/v9");
-const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle } = require("discord.js");
+const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle, GuildMember } = require("discord.js");
 const {KickDMEmbed} = require("./embeds/embeds");
 
 const path = require("path");
@@ -62,19 +62,19 @@ client.on("interactionCreate", async interaction => {
       }
       else if(customId[0] === "accept"){
         const id = customId[1];
-        if(interaction.guild.members.cache.get(id).roles.has("998674829513347082")){
+        if(interaction.guild.members.cache.get(id).roles.cache.has("998674829513347082")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
           interaction.reply(`Accepted user`);
         }
-        else if(interaction.guild.members.cache.get(id).roles.has("998674942650490940")){
+        else if(interaction.guild.members.cache.get(id).roles.cache.has("998674942650490940")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Marz"]); 
           interaction.reply(`Accepted user`);
         }
-        else if(interaction.guild.members.cache.get(id).roles.has("998675147168948234")){
+        else if(interaction.guild.members.cache.get(id).roles.cache.has("998675147168948234")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Mlky"]); 
           interaction.reply(`Accepted user`);
         }
-        else if(interaction.guild.members.cache.get(id).roles.has("1048555345573847080")){
+        else if(interaction.guild.members.cache.get(id).roles.cache.has("1048555345573847080")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["BNTY"]); 
           interaction.reply(`Accepted user`);
         }
