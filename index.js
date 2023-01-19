@@ -62,17 +62,16 @@ client.on("interactionCreate", async interaction => {
       }
       else if(customId[0] === "accept"){
         const id = customId[1];
-        console.log(id)
-        if(interaction.guild.members.cache.has("998674829513347082")){
+        if(interaction.guild.members.cache.get(id).roles.has("998674829513347082")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
         }
-        else if(interaction.guild.members.cache.has("998674942650490940")){
+        else if(interaction.guild.members.cache.get(id).roles.has("998674942650490940")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Marz"]); 
         }
-        else if(interaction.guild.members.cache.has("998675147168948234")){
+        else if(interaction.guild.members.cache.get(id).roles.has("998675147168948234")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Mlky"]); 
         }
-        else if(interaction.guild.members.cache.has("1048555345573847080")){
+        else if(interaction.guild.members.cache.get(id).roles.has("1048555345573847080")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["BNTY"]); 
         }
         interaction.reply(`Accepted user`);
