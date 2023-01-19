@@ -58,9 +58,17 @@ client.on("interactionCreate", async interaction => {
     {
 
       if(command.data.name === 'kick'){
-        if (!interaction.member.roles.cache.has('1048606041597812798')) return interaction.reply('You require administator privileges to use that command!');
+        if (!interaction.member.roles.cache.has('1048606041597812798')) return interaction.reply({content: 'You require administator privileges to use that command!', ephemeral:true});
         else{
           await command.execute(interaction);
+        }
+      }
+      else if(command.data.name === 'apply'){
+        if(!interaction.channel.id === "998709525911707679"){
+          return interaction.reply({content: "You can only use this command in #✅get-verified-here !", ephemeral:true})
+        }
+        else{
+          await command.execute(interaction)
         }
       }
       else{
