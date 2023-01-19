@@ -62,6 +62,7 @@ client.on("interactionCreate", async interaction => {
       }
       else if(customId[0] === "accept"){
         const id = customId[1];
+        console.log(id)
         if(interaction.guild.members.cache.has("998674829513347082")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
         }
