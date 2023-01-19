@@ -6,13 +6,13 @@ module.exports = {
   .setDescription("Sends an application to one of our squadrons")
   .addStringOption((option)=>{
     option
-    .setName('IGN')
+    .setName("ign")
     .setDescription('Your in-game nickname')
     .setRequired(true)
   })
   .addStringOption((option)=>{
     option
-    .setName('Squadron')
+    .setName('squadron')
     .setDescription('Tag of the squadron you are applying to (Twix/Marz/Mlky/BNTY)')
     .setRequired(true)
   }),
