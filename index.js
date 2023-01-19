@@ -3,12 +3,20 @@ const {REST} = require("@discordjs/rest");
 const {Routes} = require("discord-api-types/v9");
 const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle } = require("discord.js");
 const {KickDMEmbed} = require("./embeds/embeds");
+
 const path = require("path");
 const fs = require("fs");
 const { ButtonBuilder, ActionRowBuilder } = require('@discordjs/builders');
 const client = new Client({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildBans, IntentsBitField.Flags.MessageContent]
 });
+
+const squadronRole = {
+  "Twix": "998675476270825492",
+  "Marz": "998675824129605632",
+  "Mlky": "998675941712724159",
+  "BNTY": "1048551330890924073"
+}
 
 const commands = [];
 client.commands = new Collection();
@@ -48,6 +56,11 @@ client.on("interactionCreate", async interaction => {
         const id = customId[1]
         interaction.guild.members.unban(`${id}`);
         interaction.reply(`Successfully unbanned ${id}`)
+      }
+      else if(customId[0] === "accept"){
+        const id = customId[1];
+        const squadron = interaction.options.getString("squadron");
+        interaction.guild.members.cache.get(id).roles.add(squadronRole[squadron]);
       }
     }
 
