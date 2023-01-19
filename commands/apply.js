@@ -16,10 +16,10 @@ module.exports = {
     .setDescription('Tag of the squadron you are applying to (Twix/Marz/Mlky/BNTY)')
     .setRequired(true)
     .addChoices(
-      {name:"Twix", value:"twix"},
-      {name:"Marz", value:"marz"},
-      {name:"Mlky", value:"mlky"},
-      {name:"BNTY", value:"bnty"},
+      {name:"Twix", value:"Twix"},
+      {name:"Marz", value:"Marz"},
+      {name:"Mlky", value:"Mlky"},
+      {name:"BNTY", value:"BNTY"},
     )
   )
   ,
