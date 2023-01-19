@@ -1,4 +1,5 @@
-const { SlashCommandBuilder} = require("@discordjs/builders")
+const { SlashCommandBuilder} = require("@discordjs/builders");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -23,6 +24,14 @@ module.exports = {
   )
   ,
   async execute(interaction){
-    await interaction.reply('Test');
+    await interaction.reply({content: "Your application has been sent to recruiters", ephemeral:true, embeds:[
+      new EmbedBuilder()
+        .setTitle("Your application")
+        .setColor(0x00fc15)
+        .addFields({name:"IGN", value:`${interaction.options.getString('ign')}`},
+        {name:"Squadron", value:`${interaction.options.getString("squadron")}`})
+        .setFooter({text:"Skill Issue Bot - Application Sent"})
+        .setTimestamp()
+      ]});
   }
 }
