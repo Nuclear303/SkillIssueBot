@@ -119,6 +119,9 @@ client.on("interactionCreate", async interaction => {
         else if(!interaction.member.roles.cache.has(pendingRole[interaction.options.getString('squadron')])){
           return interaction.reply({content: `Squadron you mentioned in your application doesn't match your Pending Role!`, ephemeral:true})
         }
+        else if(interaction.options.getString('squadron') != "BNTY"){
+          return interaction.reply({content: `Temporarily we only accept into BNTY, please change your roles and apply again`, ephemeral:true})
+        } 
         else{
           await command.execute(interaction)
         }
