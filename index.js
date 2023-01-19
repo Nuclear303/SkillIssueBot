@@ -7,6 +7,7 @@ const {KickDMEmbed} = require("./embeds/embeds");
 const path = require("path");
 const fs = require("fs");
 const { ButtonBuilder, ActionRowBuilder } = require('@discordjs/builders');
+const { squadron } = require('./commands/apply');
 const client = new Client({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildBans, IntentsBitField.Flags.MessageContent]
 });
@@ -59,7 +60,7 @@ client.on("interactionCreate", async interaction => {
       }
       else if(customId[0] === "accept"){
         const id = customId[1];
-        const squadron = interaction.options.getString("squadron");
+        const squadron = squadron;
         interaction.guild.members.cache.get(id).roles.add(squadronRole[squadron]);
         interaction.reply(`Accepted user`);
       }
