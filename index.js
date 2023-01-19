@@ -116,7 +116,7 @@ client.on("interactionCreate", async interaction => {
         else if(!(interaction.options.getString('ign') == interaction.guild.members.cache.get(interaction.user.id).nickname)){
           return interaction.reply({content: `Your nickname doesn't match the provided IGN! Please change it!`, ephemeral:true})
         }
-        else if(!interaction.member.roles.cache.has(pendingRole[interaction.options.getString('ign')])){
+        else if(!interaction.member.roles.cache.has(pendingRole[interaction.options.getString('squadron')])){
           return interaction.reply({content: `Squadron you mentioned in your application doesn't match your Pending Role!`, ephemeral:true})
         }
         else{
