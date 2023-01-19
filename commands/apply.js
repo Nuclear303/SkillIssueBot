@@ -1,7 +1,7 @@
 const { SlashCommandBuilder} = require("@discordjs/builders");
 const { EmbedBuilder, ActionRowBuilder, ButtonStyle, ButtonBuilder} = require("discord.js");
 
-let int;
+
 module.exports = {
   data: new SlashCommandBuilder()
   .setName('apply')
@@ -25,7 +25,6 @@ module.exports = {
   )
   ,
   async execute(interaction){
-    int = interaction;
     await interaction.reply({content: "Your application has been sent to recruiters", ephemeral:true, embeds:[
       new EmbedBuilder()
         .setTitle("Your application")
@@ -54,7 +53,5 @@ module.exports = {
           .setStyle(ButtonStyle.Success)
       )]
     })
-  },
-  ign: int.options.getString("squadron"),
-  squadron: int.options.getString("squadron")
+  }
 }
