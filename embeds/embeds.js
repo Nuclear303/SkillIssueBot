@@ -11,9 +11,3 @@ const KickDMEmbed = new EmbedBuilder()
 module.exports ={
   KickDMEmbed
 }
-
-
-
-JostVanWair
-
-(true||(!(JostVanWair == JostVanWair))
