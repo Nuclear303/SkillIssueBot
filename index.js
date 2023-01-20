@@ -104,6 +104,11 @@ client.on("interactionCreate", async interaction => {
         }
         
       }
+      else if(customId[0] === "reject"){
+        interaction.message.delete().catch(_=>{
+          console.log("Couldn't delete application embed")
+        });
+      }
     }
 
     const command = client.commands.get(interaction.commandName);

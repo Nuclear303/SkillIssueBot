@@ -51,6 +51,12 @@ module.exports = {
           .setCustomId(`accept ${interaction.user.id}`)
           .setLabel("Accept")
           .setStyle(ButtonStyle.Success)
+      )
+      .addComponents(
+        new ButtonBuilder()
+        .setCustomId(`reject ${interaction.user.id}`)
+        .setLabel("reject")
+        .setStyle(ButtonStyle.Danger)
       )]
     })
   }
