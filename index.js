@@ -71,21 +71,36 @@ client.on("interactionCreate", async interaction => {
         if(interaction.guild.members.cache.get(id).roles.cache.has("998674829513347082")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
+          interaction.message.delete().catch(_=>{
+            console.log("Couldn't delete application embed")
+          });
         }
         else if(interaction.guild.members.cache.get(id).roles.cache.has("998674942650490940")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Marz"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
+          interaction.message.delete().catch(_=>{
+            console.log("Couldn't delete application embed")
+          });
         }
         else if(interaction.guild.members.cache.get(id).roles.cache.has("998675147168948234")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Mlky"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
+          interaction.message.delete().catch(_=>{
+            console.log("Couldn't delete application embed")
+          });
         }
         else if(interaction.guild.members.cache.get(id).roles.cache.has("1048555345573847080")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["BNTY"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
+          interaction.message.delete().catch(_=>{
+            console.log("Couldn't delete application embed")
+          });
         }
         else{
           interaction.reply("Error: User left or already verified")
+          interaction.message.delete().catch(_=>{
+            console.log("Couldn't delete application embed")
+          });
         }
         
       }
