@@ -55,7 +55,7 @@ module.exports = {
       .addComponents(
         new ButtonBuilder()
         .setCustomId(`reject ${interaction.user.id}`)
-        .setLabel("reject")
+        .setLabel("Reject")
         .setStyle(ButtonStyle.Danger)
       )]
     })
