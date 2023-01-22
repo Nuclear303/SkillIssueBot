@@ -137,7 +137,7 @@ client.on("interactionCreate", async interaction => {
           return interaction.reply({content: `Your nickname doesn't match the provided IGN! Please change it!`, ephemeral:true})
         }
         else if(!interaction.member.roles.cache.has(pendingRole[interaction.options.getString('squadron')])){
-          return interaction.reply({content: `Squadron you mentioned in your application doesn't match your Pending Role!`, ephemeral:true})
+          return interaction.reply({content: `Squadron you mentioned in your application doesn't match your P !`, ephemeral:true})
         }
         else{
           await command.execute(interaction)
@@ -197,6 +197,9 @@ client.on('guildMemberAdd', member => {
           console.log(`Could not send a message to ${member.user.tag}.`)
       });
     setTimeout(_=>{member.kick()}, 500);
+  }
+  else{
+    member.roles.add("1051078951885357108");
   }
 })
 
@@ -311,7 +314,7 @@ client.on("guildMemberUpdate", (oldM, newM) =>{
   }
   const guild = client.guilds.cache.get("735871800730189916");
   const member = guild.members.cache.get(`${newM.user.id}`);
-  if(oldM.roles.cache.has("1055518589488214026") && (newM.roles.cache.has("998674829513347082") || newM.roles.cache.has("998674942650490940") || newM.roles.cache.has("998675147168948234") || newM.roles.cache.has("1048555345573847080") || newM.roles.cache.has("998675476270825492") || newM.roles.cache.has("998675824129605632") || newM.roles.cache.has("998675941712724159") || newM.roles.cache.has("1048551330890924073")) ){
+  if(oldM.roles.cache.has("1055518589488214026") && (newM.roles.cache.has("998674829513347082") || newM.roles.cache.has("998674942650490940") || newM.roles.cache.has("998675147168948234") || newM.roles.cache.has("1048555345573847080") || member.roles.cache.has("998675476270825492") || member.roles.cache.has("998675824129605632") || member.roles.cache.has("998675941712724159") || member.roles.cache.has("1048551330890924073")) ){
     member.roles.remove("1055518589488214026");
   }
 
