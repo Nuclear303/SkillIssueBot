@@ -2,12 +2,11 @@ require('dotenv').config();
 const {REST} = require("@discordjs/rest");
 const {Routes} = require("discord-api-types/v9");
 const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle, GuildMember } = require("discord.js");
-const {KickDMEmbed} = require("./embeds/embeds");
+const {KickDMEmbed, acceptEmbed} = require("./embeds/embeds");
 
 const path = require("path");
 const fs = require("fs");
 const { ButtonBuilder, ActionRowBuilder } = require('@discordjs/builders');
-const { squadron } = require('./commands/apply');
 const client = new Client({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildBans, IntentsBitField.Flags.MessageContent]
 });
@@ -71,6 +70,7 @@ client.on("interactionCreate", async interaction => {
         if(interaction.guild.members.cache.get(id).roles.cache.has("998674829513347082")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
+          interaction.guild.members.cache.get(id).send({embeds: acceptEmbed});
           interaction.message.delete().catch(_=>{
             console.log("Couldn't delete application embed")
           });
@@ -78,6 +78,7 @@ client.on("interactionCreate", async interaction => {
         else if(interaction.guild.members.cache.get(id).roles.cache.has("998674942650490940")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Marz"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
+          interaction.guild.members.cache.get(id).send({embeds: acceptEmbed});
           interaction.message.delete().catch(_=>{
             console.log("Couldn't delete application embed")
           });
@@ -85,6 +86,7 @@ client.on("interactionCreate", async interaction => {
         else if(interaction.guild.members.cache.get(id).roles.cache.has("998675147168948234")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Mlky"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
+          interaction.guild.members.cache.get(id).send({embeds: acceptEmbed});
           interaction.message.delete().catch(_=>{
             console.log("Couldn't delete application embed")
           });
@@ -92,6 +94,7 @@ client.on("interactionCreate", async interaction => {
         else if(interaction.guild.members.cache.get(id).roles.cache.has("1048555345573847080")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["BNTY"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
+          interaction.guild.members.cache.get(id).send({embeds: acceptEmbed});
           interaction.message.delete().catch(_=>{
             console.log("Couldn't delete application embed")
           });

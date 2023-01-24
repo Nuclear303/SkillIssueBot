@@ -8,6 +8,15 @@ const KickDMEmbed = new EmbedBuilder()
 .setTimestamp()
 .setFooter({text:"Skill Issue Bot"});
 
+
+const acceptEmbed = new EmbedBuilder()
+.setColor(0x00fc15)
+.setTitle("You got accepted!")
+.setDescription("Congratulations you got accepted to the squadron!")
+.setTimestamp()
+.setFooter({text:"Skill Issue Bot"});
+
 module.exports ={
-  KickDMEmbed
+  KickDMEmbed,
+  acceptEmbed
 }
