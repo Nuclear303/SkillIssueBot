@@ -148,7 +148,7 @@ client.on("interactionCreate", async interaction => {
           return interaction.reply({content: `Your nickname doesn't match the provided IGN! Please change it!`, ephemeral:true})
         }
         else if(!interaction.member.roles.cache.has(pendingRole[interaction.options.getString('squadron')])){
-          return interaction.reply({content: `Squadron you mentioned in your application doesn't match your P !`, ephemeral:true})
+          return interaction.reply({content: `Squadron you mentioned in your application doesn't match your Pending Verification role!`, ephemeral:true})
         }
         else{
           await command.execute(interaction)
