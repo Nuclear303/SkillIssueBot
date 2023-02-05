@@ -37,7 +37,9 @@ for (const file of commandFiles) {
     commands.push(command.data.toJSON());
 }
 client.on("ready", _=>{
-  
+  client.guilds.fetch("735871800730189916", false).then(guild=>{
+    guild.members.fetch();
+  })
   const guild_ids = client.guilds.cache.map(guild => guild.id);
 
   const rest = new REST({version: '9'}).setToken(process.env.TOKEN)
@@ -49,14 +51,6 @@ client.on("ready", _=>{
     .then(console.log(`Ready to work with ${guildId}`))
     .catch(console.error);
   }
-  client.guilds.fetch("735871800730189916", false).then(guild=>{
-    guild.members.fetch();
-    guild.members.cache.every(member=>{
-      if(!member.roles.cache.has("1051078951885357108")){
-        member.roles.add("1051078951885357108");
-      }
-    })
-  })
 })
 
 
@@ -127,14 +121,14 @@ client.on("interactionCreate", async interaction => {
         });
       }
     }
-
+    
     const command = client.commands.get(interaction.commandName);
     if(!command) return;
 
     try
     {
 
-      if(command.data.name === 'kick'){
+      if(command.data.name === 'kick' || command.data.name === 'add'){
         if (!interaction.member.roles.cache.has('1048606041597812798')) return interaction.reply({content: 'You require administator privileges to use that command!', ephemeral:true});
         else{
           await command.execute(interaction);
