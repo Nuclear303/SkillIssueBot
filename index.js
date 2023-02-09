@@ -135,8 +135,8 @@ client.on("interactionCreate", async interaction => {
         }
       }
       else if(command.data.name === 'apply'){
-        if(interaction.channel.id != "998709525911707679"){
-          return interaction.reply({content: `You can only use this command in <#998709525911707679> !`, ephemeral:true})
+        if(interaction.channel.id != "1073278274735702108"){
+          return interaction.reply({content: `You can only use this command in <#1073278274735702108> !`, ephemeral:true})
         }
         else if((interaction.member.roles.cache.has("998675476270825492") || interaction.member.roles.cache.has("998675824129605632") || interaction.member.roles.cache.has("998675941712724159") || interaction.member.roles.cache.has("1048551330890924073"))){
           return interaction.reply({content: `You're already a member of a squadron!`, ephemeral:true})
