@@ -135,25 +135,25 @@ client.on("interactionCreate", async interaction => {
         }
       }
       else if(command.data.name === 'apply'){
-        return interaction.reply({content: `We've halted all applications due to an influx in numbers of applicants!`, ephemeral:true})
-        // if(interaction.channel.id != "1073278274735702108"){
-        //   return interaction.reply({content: `You can only use this command in <#1073278274735702108> !`, ephemeral:true})
-        // }
-        // else if((interaction.member.roles.cache.has("998675476270825492") || interaction.member.roles.cache.has("998675824129605632") || interaction.member.roles.cache.has("998675941712724159") || interaction.member.roles.cache.has("1048551330890924073"))){
-        //   return interaction.reply({content: `You're already a member of a squadron!`, ephemeral:true})
-        // }
-        // else if(!(interaction.member.roles.cache.has("998674829513347082") || interaction.member.roles.cache.has("998674942650490940") || interaction.member.roles.cache.has("998675147168948234") || interaction.member.roles.cache.has("1048555345573847080"))){
-        //   return interaction.reply({content: `You can't apply without a pending verification role! Get one from <#894445518573404230>`, ephemeral:true})
-        // }
-        // else if(((interaction.options.getString('ign') != interaction.guild.members.cache.get(interaction.user.id).nickname))&&(!(interaction.options.getString('ign') == interaction.user.username))){
-        //   return interaction.reply({content: `Your nickname doesn't match the provided IGN! Please change it!`, ephemeral:true})
-        // }
-        // else if(!interaction.member.roles.cache.has(pendingRole[interaction.options.getString('squadron')])){
-        //   return interaction.reply({content: `Squadron you mentioned in your application doesn't match your Pending Verification role!`, ephemeral:true})
-        // }
-        // else{
-        //   await command.execute(interaction)
-        // }
+
+        if(interaction.channel.id != "1073278274735702108"){
+          return interaction.reply({content: `You can only use this command in <#1073278274735702108> !`, ephemeral:true})
+        }
+        else if((interaction.member.roles.cache.has("998675476270825492") || interaction.member.roles.cache.has("998675824129605632") || interaction.member.roles.cache.has("998675941712724159") || interaction.member.roles.cache.has("1048551330890924073"))){
+          return interaction.reply({content: `You're already a member of a squadron!`, ephemeral:true})
+        }
+        else if(!(interaction.member.roles.cache.has("998674829513347082") || interaction.member.roles.cache.has("998674942650490940") || interaction.member.roles.cache.has("998675147168948234") || interaction.member.roles.cache.has("1048555345573847080"))){
+          return interaction.reply({content: `You can't apply without a pending verification role! Get one from <#894445518573404230>`, ephemeral:true})
+        }
+        else if(((interaction.options.getString('ign') != interaction.guild.members.cache.get(interaction.user.id).nickname))&&(!(interaction.options.getString('ign') == interaction.user.username))){
+          return interaction.reply({content: `Your nickname doesn't match the provided IGN! Please change it!`, ephemeral:true})
+        }
+        else if(!interaction.member.roles.cache.has(pendingRole[interaction.options.getString('squadron')])){
+          return interaction.reply({content: `Squadron you mentioned in your application doesn't match your Pending Verification role!`, ephemeral:true})
+        }
+        else{
+          await command.execute(interaction)
+        }
       }
       else{
         await command.execute(interaction);
