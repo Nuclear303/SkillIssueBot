@@ -53,7 +53,14 @@ client.on("ready", _=>{
   }
 })
 
-
+client.on("message", message =>{
+   if (!message.member.roles.cache.has('1048606041597812798')){
+    if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
+      message.member.timeout(1000*60*60*24, "Sending/offering free nitro links").catch(_=>{});
+      message.delete();
+    }
+   }
+})
 
 client.on("interactionCreate", async interaction => {
     if(!interaction.isCommand() && !interaction.isButton()) return;
