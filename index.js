@@ -53,7 +53,7 @@ client.on("ready", _=>{
   }
 })
 
-client.on("message", message =>{
+client.on("messageCreate", message =>{
   console.log(message.content);
    if (!message.member.roles.cache.has('1048606041597812798')){
     if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
