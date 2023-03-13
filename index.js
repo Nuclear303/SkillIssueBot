@@ -56,9 +56,13 @@ client.on("ready", _=>{
 client.on("message", message =>{
    if (!message.member.roles.cache.has('1048606041597812798')){
     if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
-      message.member.timeout(1000*60*60*24, "Sending/offering free nitro links").catch(_=>{});
+      message.member.timeout(1000*3600*24*3, "Sending/offering free nitro links").catch(_=>{});
       message.delete();
     }
+     else if((message.content.includes("discord.com/invite") || message.content.includes("discord.gg")) && !message.content.includes("discord.gg/Qsybqr6sjZ")){
+       message.member.timeout(1000*3600*24*3, "Sending discord invite links").catch(_=>{});
+       message.delete();
+     }
    }
 })
 
