@@ -16,7 +16,23 @@ const acceptEmbed = new EmbedBuilder()
 .setTimestamp()
 .setFooter({text:"Skill Issue Bot"});
 
+const inviteLinksEmbed = new EmbedBuilder()
+.setColor(0x00fc15)
+.setTitle("Timeout: 3 days")
+.setDescription("Discord invite links aren't allowed on this server")
+.setTimestamp()
+.setFooter({text:"Skill Issue Bot"});
+
+const nitroLinksEmbed = new EmbedBuilder()
+.setColor(0x00fc15)
+.setTitle("Timeout: 3 days")
+.setDescription("Discord Nitro links aren't allowed on this server (Scam protection measure)")
+.setTimestamp()
+.setFooter({text:"Skill Issue Bot"});
+
 module.exports ={
   KickDMEmbed,
-  acceptEmbed
+  acceptEmbed,
+  inviteLinksEmbed,
+  nitroLinksEmbed
 }

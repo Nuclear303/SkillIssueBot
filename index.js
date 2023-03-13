@@ -2,7 +2,7 @@ require('dotenv').config();
 const {REST} = require("@discordjs/rest");
 const {Routes} = require("discord-api-types/v9");
 const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle, GuildMember } = require("discord.js");
-const {KickDMEmbed, acceptEmbed} = require("./embeds/embeds");
+const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed} = require("./embeds/embeds");
 
 const path = require("path");
 const fs = require("fs");
@@ -58,11 +58,13 @@ client.on("messageCreate", message =>{
    if (!message.member.roles.cache.has('1048606041597812798')){
     if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
       message.member.timeout(1000*3600*24*3, "Sending/offering free nitro links").catch(_=>{});
+      message.member.send({embeds: nitroLinksEmbed}).catch(_=>{});
       message.delete();
     }
     else if((message.content.includes("discord.com/invite") || message.content.includes("discord.gg")) && !message.content.includes("discord.gg/Qsybqr6sjZ")){
       console.log(message.content)
       message.member.timeout(1000*3600*24*3, "Sending discord invite links").catch(_=>{});
+      message.member.send({embeds: inviteLinksEmbed}).catch(_=>{});
       message.delete();
     }
     else if(message.content.includes("4chan.org")){
