@@ -62,7 +62,7 @@ client.on("messageCreate", message =>{
     }
     else if((message.content.includes("discord.com/invite") || message.content.includes("discord.gg")) && !message.content.includes("discord.gg/Qsybqr6sjZ")){
       message.member.timeout(1000*3600*24*3, "Sending discord invite links").catch(_=>{});
-      message.member.send({embeds: inviteLinksEmbed}).then(_=>{
+      message.member.user.send({embeds: inviteLinksEmbed}).then(_=>{
         message.delete();
       }).catch(_=>{});
       
