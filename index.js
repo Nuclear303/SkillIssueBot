@@ -80,7 +80,9 @@ client.on("messageCreate", message =>{
       "redtube.com",
       "xnxx.com",
       "xhamster.com",
-      "rule34.xxx"
+      "rule34.xxx",
+      "rule34videos.com",
+      "rule34world.com"
     ]
     pornSites.forEach(site => {
       if(message.content.includes(site)){
