@@ -54,15 +54,20 @@ client.on("ready", _=>{
 })
 
 client.on("message", message =>{
+  console.log(message.content);
    if (!message.member.roles.cache.has('1048606041597812798')){
     if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
       message.member.timeout(1000*3600*24*3, "Sending/offering free nitro links").catch(_=>{});
       message.delete();
     }
-     else if((message.content.includes("discord.com/invite") || message.content.includes("discord.gg")) && !message.content.includes("discord.gg/Qsybqr6sjZ")){
-       message.member.timeout(1000*3600*24*3, "Sending discord invite links").catch(_=>{});
-       message.delete();
-     }
+    else if((message.content.includes("discord.com/invite") || message.content.includes("discord.gg")) && !message.content.includes("discord.gg/Qsybqr6sjZ")){
+      console.log(message.content)
+      message.member.timeout(1000*3600*24*3, "Sending discord invite links").catch(_=>{});
+      message.delete();
+    }
+    else if(message.content.includes("4chan.org")){
+      message.member.timeout(1000*3600*24*7, "Sending discord invite links").catch(_=>{});
+    }
    }
 })
 
