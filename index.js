@@ -57,12 +57,12 @@ client.on("messageCreate", message =>{
    if (!message.member.roles.cache.has('1048606041597812798')){
     if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
       message.member.timeout(1000*3600*24*3, "Sending/offering free nitro links").catch(_=>{});
-      message.author.send({embeds: nitroLinksEmbed}).catch(console.log);
+      message.author.send({embeds: [nitroLinksEmbed]}).catch(console.log);
       message.delete();
     }
     else if((message.content.includes("discord.com/invite") || message.content.includes("discord.gg")) && !message.content.includes("discord.gg/Qsybqr6sjZ")){
       message.member.timeout(1000*3600*24*3, "Sending discord invite links").catch(_=>{});
-      message.member.user.send({embeds: inviteLinksEmbed}).then(_=>{
+      message.member.user.send({embeds: [inviteLinksEmbed]}).then(_=>{
         message.delete();
       }).catch(_=>{});
       
@@ -88,7 +88,7 @@ client.on("interactionCreate", async interaction => {
         if(interaction.guild.members.cache.get(id).roles.cache.has("998674829513347082")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
-          interaction.guild.members.cache.get(id).user.send({embeds: acceptEmbed}).catch(_=>{
+          interaction.guild.members.cache.get(id).user.send({embeds: [acceptEmbed]}).catch(_=>{
             console.log("Couldn't send accept embed to user")
           });
           interaction.message.delete().catch(_=>{
@@ -98,7 +98,7 @@ client.on("interactionCreate", async interaction => {
         else if(interaction.guild.members.cache.get(id).roles.cache.has("998674942650490940")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Marz"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
-          interaction.guild.members.cache.get(id).send({embeds: acceptEmbed}).catch(_=>{
+          interaction.guild.members.cache.get(id).send({embeds: [acceptEmbed]}).catch(_=>{
             console.log("Couldn't send accept embed to user")
           });
           interaction.message.delete().catch(_=>{
@@ -108,7 +108,7 @@ client.on("interactionCreate", async interaction => {
         else if(interaction.guild.members.cache.get(id).roles.cache.has("998675147168948234")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Mlky"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
-          interaction.guild.members.cache.get(id).send({embeds: acceptEmbed}).catch(_=>{
+          interaction.guild.members.cache.get(id).send({embeds: [acceptEmbed]}).catch(_=>{
             console.log("Couldn't send accept embed to user")
           });
           interaction.message.delete().catch(_=>{
@@ -118,7 +118,7 @@ client.on("interactionCreate", async interaction => {
         else if(interaction.guild.members.cache.get(id).roles.cache.has("1048555345573847080")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["BNTY"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
-          interaction.guild.members.cache.get(id).send({embeds: acceptEmbed}).catch(_=>{
+          interaction.guild.members.cache.get(id).send({embeds: [acceptEmbed]}).catch(_=>{
             console.log("Couldn't send accept embed to user")
           });
           interaction.message.delete().catch(_=>{
