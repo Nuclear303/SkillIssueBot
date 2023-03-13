@@ -8,7 +8,7 @@ const path = require("path");
 const fs = require("fs");
 const { ButtonBuilder, ActionRowBuilder } = require('@discordjs/builders');
 const client = new Client({
-  intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildBans, IntentsBitField.Flags.MessageContent]
+  intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildBans, IntentsBitField.Flags.MessageContent, IntentsBitField.Flags.DirectMessages]
 });
 
 const squadronRole = {
@@ -68,7 +68,7 @@ client.on("messageCreate", message =>{
       
     }
     else if(message.content.includes("4chan.org")){
-      message.member.timeout(1000*3600*24*7, "Sending discord invite links").catch(_=>{});
+      message.member.timeout(1000*3600*24*7, "4chan is not allowed on this server").catch(_=>{});
     }
    }
 })
@@ -88,7 +88,7 @@ client.on("interactionCreate", async interaction => {
         if(interaction.guild.members.cache.get(id).roles.cache.has("998674829513347082")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
-          interaction.guild.members.cache.get(id).send({embeds: acceptEmbed}).catch(_=>{
+          interaction.guild.members.cache.get(id).user.send({embeds: acceptEmbed}).catch(_=>{
             console.log("Couldn't send accept embed to user")
           });
           interaction.message.delete().catch(_=>{
