@@ -57,7 +57,7 @@ client.on("messageCreate", message =>{
    if (!message.member.roles.cache.has('1048606041597812798')){
     if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
       message.member.timeout(1000*3600*24*3, "Sending/offering free nitro links").catch(_=>{});
-      console.log(message.member.user.username);
+      console.log(message.author.username);
       message.author.send({embeds: nitroLinksEmbed}).catch(_=>{});
       message.delete();
     }
