@@ -54,7 +54,7 @@ client.on("ready", _=>{
 })
 
 client.on("messageCreate", message =>{
-  if(message.member.roles == null){
+  if(message.member == null){
     return;
   }
    if (!message.member.roles?.cache.has('1048606041597812798')){
