@@ -54,10 +54,10 @@ client.on("ready", _=>{
 })
 
 client.on("messageCreate", message =>{
-  if(message.member == null){
+  if(message.author.bot == true){
     return;
   }
-   if (!message.member.roles?.cache.has('1048606041597812798')){
+   if (!message.member.roles.cache.has('1048606041597812798')){
     if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
       message.member.timeout(1000*3600*24*3, "Sending/offering free nitro links").catch(_=>{});
       message.member.user.send({embeds: [nitroLinksEmbed]}).then(_=>{
