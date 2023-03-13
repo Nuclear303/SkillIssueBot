@@ -61,10 +61,11 @@ client.on("messageCreate", message =>{
       message.delete();
     }
     else if((message.content.includes("discord.com/invite") || message.content.includes("discord.gg")) && !message.content.includes("discord.gg/Qsybqr6sjZ")){
-      console.log(message.content)
       message.member.timeout(1000*3600*24*3, "Sending discord invite links").catch(_=>{});
-      message.member.send({embeds: inviteLinksEmbed}).catch(_=>{});
-      message.delete();
+      message.member.send({embeds: inviteLinksEmbed}).then(_=>{
+        message.delete();
+      }).catch(_=>{});
+      
     }
     else if(message.content.includes("4chan.org")){
       message.member.timeout(1000*3600*24*7, "Sending discord invite links").catch(_=>{});
