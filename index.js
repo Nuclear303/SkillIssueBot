@@ -58,7 +58,7 @@ client.on("messageCreate", message =>{
     if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
       message.member.timeout(1000*3600*24*3, "Sending/offering free nitro links").catch(_=>{});
       console.log(message.member.user.username);
-      message.member.send({embeds: nitroLinksEmbed}).catch(_=>{});
+      message.author.send({embeds: nitroLinksEmbed}).catch(_=>{});
       message.delete();
     }
     else if((message.content.includes("discord.com/invite") || message.content.includes("discord.gg")) && !message.content.includes("discord.gg/Qsybqr6sjZ")){
