@@ -2,7 +2,7 @@ require('dotenv').config();
 const {REST} = require("@discordjs/rest");
 const {Routes} = require("discord-api-types/v9");
 const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle, GuildMember } = require("discord.js");
-const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed} = require("./embeds/embeds");
+const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed, chanLinksEmbed, pornLinksEmbed} = require("./embeds/embeds");
 
 const path = require("path");
 const fs = require("fs");
@@ -54,11 +54,12 @@ client.on("ready", _=>{
 })
 
 client.on("messageCreate", message =>{
-   if (!message.member.roles.cache.has('1048606041597812798')){
+   if (!message.member.roles?.cache.has('1048606041597812798')){
     if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
       message.member.timeout(1000*3600*24*3, "Sending/offering free nitro links").catch(_=>{});
-      message.author.send({embeds: [nitroLinksEmbed]}).catch(console.log);
-      message.delete();
+      message.member.user.send({embeds: [nitroLinksEmbed]}).then(_=>{
+        message.delete();
+      }).catch(_=>{});
     }
     else if((message.content.includes("discord.com/invite") || message.content.includes("discord.gg")) && !message.content.includes("discord.gg/Qsybqr6sjZ")){
       message.member.timeout(1000*3600*24*3, "Sending discord invite links").catch(_=>{});
@@ -69,7 +70,26 @@ client.on("messageCreate", message =>{
     }
     else if(message.content.includes("4chan.org")){
       message.member.timeout(1000*3600*24*7, "4chan is not allowed on this server").catch(_=>{});
+      message.member.user.send({embeds: [chanLinksEmbed]}).then(_=>{
+        message.delete();
+      }).catch(_=>{});
     }
+    const pornSites = [
+      "pornhub.com",
+      "xvideos.com",
+      "redtube.com",
+      "xnxx.com",
+      "xhamster.com",
+      "rule34.xxx"
+    ]
+    pornSites.forEach(site => {
+      if(message.content.includes(site)){
+        message.member.timeout(1000*3600*24*7, "Porn sites aren't allowed on this server").catch(_=>{});
+        message.member.user.send({embeds: [pornLinksEmbed]}).then(_=>{
+          message.delete();
+        }).catch(_=>{});
+      }
+    });
    }
 })
 

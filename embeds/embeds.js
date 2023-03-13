@@ -17,16 +17,30 @@ const acceptEmbed = new EmbedBuilder()
 .setFooter({text:"Skill Issue Bot"});
 
 const inviteLinksEmbed = new EmbedBuilder()
-.setColor(0x00fc15)
+.setColor(0xFF0000)
 .setTitle("Timeout: 3 days")
 .setDescription("Discord invite links aren't allowed on this server")
 .setTimestamp()
 .setFooter({text:"Skill Issue Bot"});
 
 const nitroLinksEmbed = new EmbedBuilder()
-.setColor(0x00fc15)
+.setColor(0xFF0000)
 .setTitle("Timeout: 3 days")
 .setDescription("Discord Nitro links aren't allowed on this server (Scam protection measure)")
+.setTimestamp()
+.setFooter({text:"Skill Issue Bot"});
+
+const chanLinksEmbed = new EmbedBuilder()
+.setColor(0xFF0000)
+.setTitle("Timeout: 7 days")
+.setDescription("4chan links aren't allowed on this server")
+.setTimestamp()
+.setFooter({text:"Skill Issue Bot"});
+
+const pornLinksEmbed = new EmbedBuilder()
+.setColor(0xFF0000)
+.setTitle("Timeout: 7 days")
+.setDescription("Porn is not allowed on this server")
 .setTimestamp()
 .setFooter({text:"Skill Issue Bot"});
 
@@ -34,5 +48,7 @@ module.exports ={
   KickDMEmbed,
   acceptEmbed,
   inviteLinksEmbed,
-  nitroLinksEmbed
+  nitroLinksEmbed,
+  chanLinksEmbed,
+  pornLinksEmbed
 }
