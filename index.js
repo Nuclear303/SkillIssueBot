@@ -54,7 +54,7 @@ client.on("ready", _=>{
   client.user.setPresence({
         activity: {
             name: `If I don't work, it's your Skill Issue`,
-            type: 'PLAYING' // Options: PLAYING, STREAMING, LISTENING, WATCHING, CUSTOM_STATUS
+            type: 'CUSTOM_STATUS' // Options: PLAYING, STREAMING, LISTENING, WATCHING, CUSTOM_STATUS
         },
         status: 'online' // Options: online, idle, dnd, invisible
     })
