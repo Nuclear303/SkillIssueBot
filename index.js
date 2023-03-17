@@ -253,8 +253,8 @@ client.on('guildMemberAdd', member => {
     setTimeout(_=>{member.kick()}, 500);
   }
   else{
-    member.roles.add(/*"1051078951885357108"*/"1055524247193276568");
-    member.guild.channels.cache.get("879055215695904788").send({embeds:
+    member.roles.add("1051078951885357108");
+    member.guild.channels.cache.get("1055524247193276568").send({embeds:
       [
         new EmbedBuilder()
         .setTitle(`Welcome to the server, ${member.user.username}!`)
