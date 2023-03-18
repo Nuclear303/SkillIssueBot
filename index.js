@@ -52,6 +52,7 @@ client.on("ready", _=>{
     .catch(console.error);
   }
   client.user.setActivity("and judging issues with your skill", {type: "WATCHING"});
+  console.log(client.user.presence.activities);
 })
 
 client.on("messageCreate", message =>{
