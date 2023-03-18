@@ -8,7 +8,7 @@ const path = require("path");
 const fs = require("fs");
 const { ButtonBuilder, ActionRowBuilder } = require('@discordjs/builders');
 const client = new Client({
-  intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildBans, IntentsBitField.Flags.MessageContent, IntentsBitField.Flags.DirectMessages]
+  intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildBans, IntentsBitField.Flags.MessageContent, IntentsBitField.Flags.DirectMessages, IntentsBitField.Flags.GuildPresences]
 });
 
 const squadronRole = {
@@ -37,7 +37,7 @@ for (const file of commandFiles) {
   commands.push(command.data.toJSON());
 }
 client.on("ready", _=>{
-  client.user.setActivity("and jugding issues with your skill", {type: "WATCHING"})
+  client.user.setActivity("and judging issues with your skill", {type: "WATCHING"})
   client.guilds.fetch("735871800730189916", false).then(guild=>{
     guild.members.fetch();
   })
