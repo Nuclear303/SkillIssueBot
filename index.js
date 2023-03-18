@@ -31,12 +31,13 @@ const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
-    client.commands.set(command.data.name, command);
-    commands.push(command.data.toJSON());
+  const filePath = path.join(commandsPath, file);
+  const command = require(filePath);
+  client.commands.set(command.data.name, command);
+  commands.push(command.data.toJSON());
 }
 client.on("ready", _=>{
+  client.user.setActivity("and jugding issues with your skill", {type: "WATCHING"})
   client.guilds.fetch("735871800730189916", false).then(guild=>{
     guild.members.fetch();
   })
@@ -51,7 +52,6 @@ client.on("ready", _=>{
     .then(console.log(`Ready to work with ${guildId}`))
     .catch(console.error);
   }
-  client.user.setActivity("and jugding issues with your skill", {type: "WATCHING"})
 })
 
 client.on("messageCreate", message =>{
