@@ -51,13 +51,7 @@ client.on("ready", _=>{
     .then(console.log(`Ready to work with ${guildId}`))
     .catch(console.error);
   }
-  client.user.setPresence({
-        activity: {
-            name: `If I don't work, it's your Skill Issue`,
-            type: 'CUSTOM_STATUS' // Options: PLAYING, STREAMING, LISTENING, WATCHING, CUSTOM_STATUS
-        },
-        status: 'online' // Options: online, idle, dnd, invisible
-    })
+  client.user.setActivity("and jugding issues with your skill", {type: "WATCHING"})
 })
 
 client.on("messageCreate", message =>{
