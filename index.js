@@ -51,7 +51,7 @@ client.on("ready", _=>{
     .then(console.log(`Ready to work with ${guildId}`))
     .catch(console.error);
   }
-  client.user.setPresence({activities:[{name:`and judging your issue with skill`, type:"WATCHING"}], status:"online"})
+  
 })
 
 client.on("messageCreate", message =>{
@@ -176,6 +176,10 @@ client.on("interactionCreate", async interaction => {
         else{
           await command.execute(interaction);
         }
+      }
+      else if(command.data.name === 'ping'){
+        client.user.setActivity("and judging issues with your skill", {type: "WATCHING"});
+        await command.execute(interaction);
       }
       else if(command.data.name === 'apply'){
 
