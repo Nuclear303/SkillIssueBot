@@ -51,8 +51,7 @@ client.on("ready", _=>{
     .then(console.log(`Ready to work with ${guildId}`))
     .catch(console.error);
   }
-  client.user.setActivity("and judging issues with your skill", {type: "WATCHING"});
-  console.log(client.user.presence.activities);
+  client.user.setActivity("and judging issues with your skill", {type: "WATCHING"}).set(client.user.presence.activities);
 })
 
 client.on("messageCreate", message =>{
