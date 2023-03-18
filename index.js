@@ -37,21 +37,21 @@ for (const file of commandFiles) {
   commands.push(command.data.toJSON());
 }
 client.on("ready", _=>{
-  client.user.setActivity("and judging issues with your skill", {type: "WATCHING"})
   client.guilds.fetch("735871800730189916", false).then(guild=>{
     guild.members.fetch();
   })
   const guild_ids = client.guilds.cache.map(guild => guild.id);
-
+  
   const rest = new REST({version: '9'}).setToken(process.env.TOKEN)
-
+  
   for (const guildId of guild_ids) {
     rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, guildId),
-      {body: commands}
+    {body: commands}
     )
     .then(console.log(`Ready to work with ${guildId}`))
     .catch(console.error);
   }
+  client.user.setActivity("and judging issues with your skill", {type: "WATCHING"});
 })
 
 client.on("messageCreate", message =>{
