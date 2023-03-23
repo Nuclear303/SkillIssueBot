@@ -55,6 +55,9 @@ client.on("ready", _=>{
 })
 
 client.on("messageCreate", message =>{
+  if(message.content.toLowerCase().includes("woźny")){
+    message.delete();
+  }
   if(message.author.bot == true || message.member == null) return;
    if (!message.member.roles.cache.has('1048606041597812798')){
     if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
