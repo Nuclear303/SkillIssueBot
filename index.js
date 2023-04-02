@@ -112,7 +112,7 @@ client.on("interactionCreate", async interaction => {
         interaction.reply(`Successfully unbanned ${id}`)
       }
       else if(customId[0] === "accept"){
-        if(interaction.guild.members.cache.get(id) != null){
+        if(interaction.guild.members.cache.get(customId[1]) != null){
           const id = customId[1];
         if(interaction.guild.members.cache.get(id).roles.cache.has("998674829513347082")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
