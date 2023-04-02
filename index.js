@@ -112,7 +112,8 @@ client.on("interactionCreate", async interaction => {
         interaction.reply(`Successfully unbanned ${id}`)
       }
       else if(customId[0] === "accept"){
-        const id = customId[1];
+        if(interaction.guild.members.cache.get(id) != null){
+          const id = customId[1];
         if(interaction.guild.members.cache.get(id).roles.cache.has("998674829513347082")){
           interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
           interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
@@ -160,6 +161,7 @@ client.on("interactionCreate", async interaction => {
           });
         }
         
+        }
       }
       else if(customId[0] === "reject"){
         interaction.message.delete().catch(_=>{
