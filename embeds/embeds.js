@@ -44,11 +44,19 @@ const pornLinksEmbed = new EmbedBuilder()
 .setTimestamp()
 .setFooter({text:"Skill Issue Bot"});
 
+const selfharmEmbed = new EmbedBuilder()
+.setColor(0xFF0000)
+.setTitle("Timeout: 1 day")
+.setDescription("We do not condone encouraging selfharm on the server")
+.setTimestamp()
+.setFooter({text:"Skill Issue Bot"});
+
 module.exports ={
   KickDMEmbed,
   acceptEmbed,
   inviteLinksEmbed,
   nitroLinksEmbed,
   chanLinksEmbed,
-  pornLinksEmbed
+  pornLinksEmbed,
+  selfharmEmbed
 }

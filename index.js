@@ -2,7 +2,7 @@ require('dotenv').config();
 const {REST} = require("@discordjs/rest");
 const {Routes} = require("discord-api-types/v9");
 const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle, GuildMember } = require("discord.js");
-const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed, chanLinksEmbed, pornLinksEmbed} = require("./embeds/embeds");
+const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed, chanLinksEmbed, pornLinksEmbed, selfharmEmbed} = require("./embeds/embeds");
 
 const path = require("path");
 const fs = require("fs");
@@ -76,6 +76,12 @@ client.on("messageCreate", message =>{
     else if(message.content.includes("4chan.org")){
       message.member.timeout(1000*3600*24*7, "4chan is not allowed on this server").catch(_=>{});
       message.member.user.send({embeds: [chanLinksEmbed]}).then(_=>{
+        message.delete();
+      }).catch(_=>{});
+    }
+    else if(message.content.includes("kys") || (message.content.includes("kill") && (message.content.includes("yourself") || message.content.includes("your self") || message.content.includes("yourselves") || message.content.includes("your selves")))){
+      message.member.timeout(1000*3600*24, "Encouraging selfharm").catch(_=>{});
+      message.member.user.send({embeds: [selfharmEmbed]}).then(_=>{
         message.delete();
       }).catch(_=>{});
     }
