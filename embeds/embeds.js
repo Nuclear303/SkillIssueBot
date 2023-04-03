@@ -46,7 +46,7 @@ const pornLinksEmbed = new EmbedBuilder()
 
 const selfharmEmbed = new EmbedBuilder()
 .setColor(0xFF0000)
-.setTitle("Timeout: 1 day")
+.setTitle("Timeout: 10 minutes")
 .setDescription("We do not condone encouraging selfharm on the server")
 .setTimestamp()
 .setFooter({text:"Skill Issue Bot"});
