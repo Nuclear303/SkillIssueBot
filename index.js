@@ -80,7 +80,7 @@ client.on("messageCreate", message =>{
       }).catch(_=>{});
     }
     else if(message.content.includes("kys") || (message.content.includes("kill") && (message.content.includes("yourself") || message.content.includes("your self") || message.content.includes("yourselves") || message.content.includes("your selves")))){
-      message.member.timeout(1000*3600*24, "Encouraging selfharm").catch(_=>{});
+      message.member.timeout(1000*600, "Encouraging selfharm").catch(_=>{});
       message.member.user.send({embeds: [selfharmEmbed]}).then(_=>{
         message.delete();
       }).catch(_=>{});
