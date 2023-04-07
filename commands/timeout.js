@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, SlashCommandUserOption } = require("@discordjs/builders");
 const { Guild, GuildMember } = require("discord.js");
-const { client } = require("../index");
 module.exports = {
   data: new SlashCommandBuilder()
   .setName('timeout')
