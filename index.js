@@ -106,7 +106,6 @@ client.on("messageCreate", message =>{
    }
 })
 
-
 client.on("interactionCreate", async interaction => {
     if(!interaction.isCommand() && !interaction.isButton()) return;
 
@@ -182,7 +181,7 @@ client.on("interactionCreate", async interaction => {
     try
     {
 
-      if(command.data.name === 'kick'){
+      if(command.data.name === 'kick' || command.data.name === 'timeout'){
         if (!interaction.member.roles.cache.has('1048606041597812798')) return interaction.reply({content: 'You require administator privileges to use that command!', ephemeral:true});
         else{
           await command.execute(interaction);
