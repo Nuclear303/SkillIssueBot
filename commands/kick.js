@@ -14,7 +14,7 @@ module.exports = {
     const defaults = ["https://cdn.discordapp.com/embed/avatars/1.png","https://cdn.discordapp.com/embed/avatars/2.png", "https://cdn.discordapp.com/embed/avatars/3.png","https://cdn.discordapp.com/embed/avatars/4.png" ,"https://cdn.discordapp.com/embed/avatars/5.png"];
     const target = interaction.options.getUser('target');
     if(defaults.includes(String(target.displayAvatarURL()))){
-      await interaction.guild.members.kick(target);
+      await interaction.guild.members.get()
       await interaction.reply(`Kicking ${target.username} for having a default pfp`);
     }
     else{

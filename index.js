@@ -93,7 +93,8 @@ client.on("messageCreate", message =>{
       "xhamster.com",
       "rule34.xxx",
       "rule34videos.com",
-      "rule34world.com"
+      "rule34world.com",
+      "https://media.discordapp.net/attachments/688565126349324290/1006906760180793364/Sequence_01.gif"
     ]
     pornSites.forEach(site => {
       if(message.content.includes(site)){

@@ -18,6 +18,6 @@ module.exports = {
     const target = interaction.options.getUser('target');
     const time = interaction.options.getNumber('time');
     const member = interaction.guild.members.cache.get(target.id);
-    member.timeout(1000*60*time).catch(_=>{});
+    member.timeout(1000*60*time)
   }
 }
