@@ -60,26 +60,27 @@ client.on("messageCreate", message =>{
   }
   if(message.author.bot == true || message.member == null) return;
    if (!message.member.roles.cache.has('1048606041597812798')){
-    if(message.content.includes("discord.gift") || message.content.includes("free nitro")){
+    const mess = message.content.toLowerCase();
+    if(mess.includes("discord.gift") || mess.includes("free nitro")){
       message.member.timeout(1000*3600*24*3, "Sending/offering free nitro links").catch(_=>{});
       message.member.user.send({embeds: [nitroLinksEmbed]}).then(_=>{
         message.delete();
       }).catch(_=>{});
     }
-    else if((message.content.includes("discord.com/invite") || message.content.includes("discord.gg")) && !message.content.includes("discord.gg/Qsybqr6sjZ")){
+    else if((mess.includes("discord.com/invite") || mess.includes("discord.gg")) && !mess.includes("discord.gg/Qsybqr6sjZ")){
       message.member.timeout(1000*3600*24*3, "Sending discord invite links").catch(_=>{});
       message.member.user.send({embeds: [inviteLinksEmbed]}).then(_=>{
         message.delete();
       }).catch(_=>{});
       
     }
-    else if(message.content.includes("4chan.org")){
+    else if(mess.includes("4chan.org")){
       message.member.timeout(1000*3600*24*7, "4chan is not allowed on this server").catch(_=>{});
       message.member.user.send({embeds: [chanLinksEmbed]}).then(_=>{
         message.delete();
       }).catch(_=>{});
     }
-    else if(message.content.includes("kys") || (message.content.includes("kill") && (message.content.includes("yourself") || message.content.includes("your self") || message.content.includes("yourselves") || message.content.includes("your selves")))){
+    else if(mess.includes("kys") || (mess.includes("kill") && (mess.includes("yourself") || mess.includes("your self") || mess.includes("yourselves") || mess.includes("your selves")))){
       message.member.timeout(1000*600, "Encouraging selfharm").catch(_=>{});
       message.member.user.send({embeds: [selfharmEmbed]}).then(_=>{
         message.delete();
@@ -97,7 +98,7 @@ client.on("messageCreate", message =>{
       "https://media.discordapp.net/attachments/688565126349324290/1006906760180793364/Sequence_01.gif"
     ]
     pornSites.forEach(site => {
-      if(message.content.includes(site)){
+      if(mess.includes(site)){
         message.member.timeout(1000*3600*24*7, "Porn sites aren't allowed on this server").catch(_=>{});
         message.member.user.send({embeds: [pornLinksEmbed]}).then(_=>{
           message.delete();
@@ -449,7 +450,7 @@ client.on("messageDelete", message =>{
           .setFooter({text: "Skill Issue Bot - Message Deleted"})
           .addFields({name: "Message Author", value: `${message.member}`, inline:true},
           {name: "Author ID:", value:`${message.member.id}`, inline:true},
-          {name: "Message content", value:`${message.content}`})
+          {name: "Message content", value:`${mess}`})
           .setTimestamp()
         ]})
       }
