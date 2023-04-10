@@ -175,7 +175,7 @@ client.on("interactionCreate", async interaction => {
         const rejectionEmbed = new EmbedBuilder()
         .setColor(0xFF7B00)
         .setTitle("Your application has been rejected")
-        .setDescription("We rejected your application to the squadron of your choice.\nThe most common reason is, that we didn't find your application in the game.\nFor more information, message the recruiter mentioned below")
+        .setDescription("We rejected your application to the squadron of your choice.\n\nThe most common reason is, that we didn't find your application in the game.\nAnother reason may be that you reapplied to a new squadron in which case your old application has been rejected .\n\nFor more information, message the recruiter mentioned below")
         .addFields({name:"Recruiter that rejected the application", value: interaction.member.nickname})
         .setTimestamp()
         .setFooter({text:"Skill Issue Bot"});
