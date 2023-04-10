@@ -286,6 +286,7 @@ client.on('guildMemberAdd', member => {
     member.guild.channels.cache.get("879055215695904788").send({embeds:
       [
         new EmbedBuilder()
+        .setTitle("Welcome to the server!")
         .setThumbnail(member.displayAvatarURL())
         .setFooter({text: `Skill Issue Bot - Member #${member.guild.memberCount}`})
         .setTimestamp()
