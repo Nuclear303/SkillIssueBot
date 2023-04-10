@@ -51,6 +51,8 @@ const selfharmEmbed = new EmbedBuilder()
 .setTimestamp()
 .setFooter({text:"Skill Issue Bot"});
 
+
+
 module.exports ={
   KickDMEmbed,
   acceptEmbed,

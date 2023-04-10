@@ -171,6 +171,18 @@ client.on("interactionCreate", async interaction => {
         }
       }
       else if(customId[0] === "reject"){
+        const id = customId[1];
+        const rejectionEmbed = new EmbedBuilder()
+        .setColor(0xFF7B00)
+        .setTitle("Your application has been rejected")
+        .setDescription("We rejected your application to the squadron of your choice.\nThe most common reason is, that we didn't find your application in the game.\nFor more information, message one of recruiters on the server")
+        .addFields({name:"Recruiter that rejected the application", value: interaction.member.nickname})
+        .setTimestamp()
+        .setFooter({text:"Skill Issue Bot"});
+        interaction.guild.members.cache.get(id).send({embeds: [rejectionEmbed]}).catch(_=>{
+          console.log("Couldn't send accept embed to user")
+        });
+
         interaction.message.delete().catch(_=>{
           console.log("Couldn't delete application embed")
         });
