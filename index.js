@@ -180,9 +180,13 @@ client.on("interactionCreate", async interaction => {
         .addFields({name:"Recruiter that rejected the application", value: interaction.member.nickname})
         .setTimestamp()
         .setFooter({text:"Skill Issue Bot"});
-        interaction.guild.members.cache.get(id).send({embeds: [rejectionEmbed]}).catch(_=>{
-          console.log("Couldn't send accept embed to user")
-        });
+        interaction.guild.members.cache.fetch(id, false).then( member=>{
+          console.log(member);
+          member.send({embeds: [rejectionEmbed]}).catch(_=>{
+            console.log("Couldn't send accept embed to user")
+          });
+        })
+        
 
         interaction.message.delete().catch(_=>{
           console.log("Couldn't delete application embed")
