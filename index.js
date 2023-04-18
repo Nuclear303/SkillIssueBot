@@ -172,25 +172,29 @@ client.on("interactionCreate", async interaction => {
       }
       else if(customId[0] === "reject"){
         const id = customId[1];
-        console.log(interaction.guild.members.cache.get(id));
-        const rejectionEmbed = new EmbedBuilder()
-        .setColor(0xFF7B00)
-        .setTitle("Your application has been rejected")
-        .setDescription("We rejected your application to the squadron of your choice.\n\nThe most common reason is, that we didn't find your application in the game.\nAnother reason may be that you reapplied to a new squadron in which case your old application has been rejected .\n\nFor more information, message the recruiter mentioned below")
-        .addFields({name:"Recruiter that rejected the application", value: interaction.member.nickname})
-        .setTimestamp()
-        .setFooter({text:"Skill Issue Bot"});
-        interaction.guild.members.cache.fetch(id, false).then( member=>{
-          console.log(member);
-          member.send({embeds: [rejectionEmbed]}).catch(_=>{
+        if(interaction.guild.members.cache.get(id)){
+          const rejectionEmbed = new EmbedBuilder()
+          .setColor(0xFF7B00)
+          .setTitle("Your application has been rejected")
+          .setDescription("We rejected your application to the squadron of your choice.\n\nThe most common reason is, that we didn't find your application in the game.\nAnother reason may be that you reapplied to a new squadron in which case your old application has been rejected .\n\nFor more information, message the recruiter mentioned below")
+          .addFields({name:"Recruiter that rejected the application", value: interaction.member.nickname})
+          .setTimestamp()
+          .setFooter({text:"Skill Issue Bot"});
+          interaction.guild.members.cache.get(id).send({embeds: [rejectionEmbed]}).catch(_=>{
             console.log("Couldn't send accept embed to user")
           });
-        })
+  
+          interaction.message.delete().catch(_=>{
+            console.log("Couldn't delete application embed")
+          });
+        }
+        else{
+          interaction.reply("Error: User left or already verified")
+          interaction.message.delete().catch(_=>{
+            console.log("Couldn't delete application embed")
+          });
+        }
         
-
-        interaction.message.delete().catch(_=>{
-          console.log("Couldn't delete application embed")
-        });
       }
     }
     
