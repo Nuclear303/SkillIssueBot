@@ -189,7 +189,6 @@ client.on("interactionCreate", async interaction => {
           });
         }
         else{
-          interaction.reply("Error: User left or already verified")
           interaction.message.delete().catch(_=>{
             console.log("Couldn't delete application embed")
           });
