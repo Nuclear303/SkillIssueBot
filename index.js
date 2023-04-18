@@ -172,7 +172,7 @@ client.on("interactionCreate", async interaction => {
       }
       else if(customId[0] === "reject"){
         const id = customId[1];
-        console.log(id);
+        console.log(interaction.guild.members.cache.get(id));
         const rejectionEmbed = new EmbedBuilder()
         .setColor(0xFF7B00)
         .setTitle("Your application has been rejected")
