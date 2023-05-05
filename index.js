@@ -55,7 +55,7 @@ client.on("ready", _=>{
 })
 
 client.on("messageCreate", message =>{
-  if(message.content.toLowerCase().includes("woźny") || message.content.toLowerCase().includes("w o ź n y")){
+  if(message.content.toLowerCase().includes("woźny") || message.content.toLowerCase().includes("w o ź n y") || message.content.toLowerCase().includes("uwu")){
     message.delete();
   }
   if(message.author.bot == true || message.member == null) return;
