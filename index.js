@@ -214,7 +214,9 @@ client.on("interactionCreate", async interaction => {
         await command.execute(interaction);
       }
       else if(command.data.name === 'apply'){
-
+        console.log("Inputted:" + interaction.options.getString('ign'))
+        console.log("Nickname:" + interaction.guild.members.cache.get(interaction.user.id).nickname);
+        console.log("username:" + interaction.user.username)
         if(interaction.channel.id != "1073278274735702108"){
           return interaction.reply({content: `You can only use this command in <#1073278274735702108> !`, ephemeral:true})
         }
