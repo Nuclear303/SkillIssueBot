@@ -229,9 +229,6 @@ client.on("interactionCreate", async interaction => {
         else if(!interaction.member.roles.cache.has(pendingRole[interaction.options.getString('squadron')])){
           return interaction.reply({content: `Squadron you mentioned in your application doesn't match your Pending Verification role!`, ephemeral:true})
         }
-        else if(interaction.member.roles.cache.has(pendingRole["Marz"])){
-          return interaction.reply({content: `Due to a high number of people applying to Marz, we only accept applicants for Twix, Mlky and BNTY, please reapply if possible. Spots in Mlky/BNTY are almost guaranteed.`, ephemeral:true})
-        }
         else{
           await command.execute(interaction)
         }
