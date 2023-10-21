@@ -61,7 +61,7 @@ client.on("messageCreate", message =>{
   if(message.author.bot == true || message.member == null) return;
    if (!message.member.roles.cache.has('1048606041597812798')){
     const mess = message.content.toLowerCase();
-    if(mess.includes("discord.gift") || mess.includes("free nitro")){
+    if(mess.includes("discord.gift")){
       message.member.timeout(1000*3600*24*3, "Sending/offering free nitro links").catch(_=>{});
       message.member.user.send({embeds: [nitroLinksEmbed]}).then(_=>{
         message.delete();
@@ -80,7 +80,7 @@ client.on("messageCreate", message =>{
         message.delete();
       }).catch(_=>{});
     }
-    else if(mess.includes("kys") || mess.includes("kуs") || mess.includes("куs")|| mess.includes("кys") ||(mess.includes("kill") && (mess.includes("yourself") || mess.includes("your self") || mess.includes("yourselves") || mess.includes("your selves")))){
+    else if(mess.includes(" kys ") || mess.includes("kуs") || mess.includes("куs")|| mess.includes("кys") ||(mess.includes("kill") && (mess.includes("yourself") || mess.includes("your self") || mess.includes("yourselves") || mess.includes("your selves")))){
       message.member.timeout(1000*600, "Encouraging selfharm").catch(_=>{});
       message.member.user.send({embeds: [selfharmEmbed]}).then(_=>{
         message.delete();
@@ -94,8 +94,7 @@ client.on("messageCreate", message =>{
       "xhamster.com",
       "rule34.xxx",
       "rule34videos.com",
-      "rule34world.com",
-      "https://media.discordapp.net/attachments/688565126349324290/1006906760180793364/Sequence_01.gif"
+      "rule34world.com"
     ]
     pornSites.forEach(site => {
       if(mess.includes(site)){
