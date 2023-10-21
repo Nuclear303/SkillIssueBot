@@ -80,7 +80,7 @@ client.on("messageCreate", message =>{
         message.delete();
       }).catch(_=>{});
     }
-    else if(mess.includes(" kys ") || mess.includes("kуs") || mess.includes("куs")|| mess.includes("кys") ||(mess.includes("kill") && (mess.includes("yourself") || mess.includes("your self") || mess.includes("yourselves") || mess.includes("your selves")))){
+    else if(mess.includes("kys ") || mess == "kys" || mess.includes("kуs") || mess.includes("куs")|| mess.includes("кys") ||(mess.includes("kill") && (mess.includes("yourself") || mess.includes("your self") || mess.includes("yourselves") || mess.includes("your selves")))){
       message.member.timeout(1000*600, "Encouraging selfharm").catch(_=>{});
       message.member.user.send({embeds: [selfharmEmbed]}).then(_=>{
         message.delete();
