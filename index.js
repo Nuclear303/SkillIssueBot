@@ -223,6 +223,9 @@ client.on("interactionCreate", async interaction => {
           return interaction.reply({content: `You can't apply without a pending verification role! Get one from <#894445518573404230>`, ephemeral:true})
         }
         else if(((interaction.options.getString('ign') != interaction.guild.members.cache.get(interaction.user.id).nickname))&&(!(interaction.options.getString('ign') == interaction.user.username))){
+          console.log("IGN: ", interaction.options.getString('ign'))
+          console.log("Nickname: ", interaction.guild.members.cache.get(interaction.user.id).nickname);
+          console.log("Username: ", interaction.user.username)
           return interaction.reply({content: `Your nickname doesn't match the provided IGN! Please change it!`, ephemeral:true})
         }
         else if(!interaction.member.roles.cache.has(pendingRole[interaction.options.getString('squadron')])){
