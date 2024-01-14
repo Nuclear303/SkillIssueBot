@@ -225,7 +225,7 @@ client.on("interactionCreate", async interaction => {
         else if(((interaction.options.getString('ign') != interaction.guild.members.cache.get(interaction.user.id).nickname))&&((interaction.options.getString('ign') != interaction.user.displayName))){
           console.log("IGN: ", interaction.options.getString('ign'))
           console.log("Nickname: ", interaction.guild.members.cache.get(interaction.user.id).nickname);
-          console.log("Username: ", interaction.user.username)
+          console.log("Username: ", interaction.user.displayName)
           return interaction.reply({content: `Your nickname doesn't match the provided IGN! Please change it!`, ephemeral:true})
         }
         else if(!interaction.member.roles.cache.has(pendingRole[interaction.options.getString('squadron')])){
