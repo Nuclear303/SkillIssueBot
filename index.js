@@ -208,7 +208,9 @@ client.on("interactionCreate", async interaction => {
           }
           ],
           parent:"1200730962401706104"
-        }).catch(_=>{
+        })
+        .then(_=>{})
+        .catch(_=>{
           interaction.reply({content:"Something went wrong. Try again or contact @Nuclear303 to report a bot bug", ephemeral:true})
         })
       }
