@@ -1,5 +1,5 @@
 const { SlashCommandBuilder} = require("@discordjs/builders");
-const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
+const { PermissionFlagsBits } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
   .setName('closeticket')
