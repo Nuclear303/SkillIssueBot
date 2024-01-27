@@ -12,6 +12,18 @@ module.exports = {
       deny: [PermissionFlagsBits.SendMessages]
     },
     {
+      id:"1048606041597812798",
+      allow:[PermissionFlagsBits.ViewChannel]
+    },
+    {
+      id:"998682580268367884",
+      allow:[PermissionFlagsBits.ViewChannel]
+    },
+    {
+      id:"893305484537397278",
+      allow:[PermissionFlagsBits.ViewChannel]
+    },
+    {
       id: "894458473247567882",
       deny:[PermissionFlagsBits.ViewChannel]
     }
