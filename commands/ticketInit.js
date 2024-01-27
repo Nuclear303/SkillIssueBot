@@ -2,7 +2,7 @@ const { SlashCommandBuilder} = require("@discordjs/builders");
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
-  .setName('ticketInit')
+  .setName('initializeticket')
   .setDescription("Initializes the ticket system")
   .setDefaultMemberPermissions(0),
   async execute(interaction){
