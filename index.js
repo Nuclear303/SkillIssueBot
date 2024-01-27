@@ -1,7 +1,7 @@
 require('dotenv').config();
 const {REST} = require("@discordjs/rest");
-const {Routes} = require("discord-api-types/v9");
-const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle, GuildMember } = require("discord.js");
+const {Routes, PermissionFlagsBits} = require("discord-api-types/v9");
+const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle, GuildMember, ChannelType, OverwriteType } = require("discord.js");
 const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed, chanLinksEmbed, pornLinksEmbed, selfharmEmbed} = require("./embeds/embeds");
 
 const path = require("path");
@@ -194,6 +194,26 @@ client.on("interactionCreate", async interaction => {
         }
         
       }
+      else if(customId[0] == "createTicket"){
+        interaction.guild.channels.create({
+          name:`ticket-${interaction.member.id}`,
+          type:ChannelType.GuildText,
+          permissionOverwrites:[{
+            id: "894458473247567882",
+            deny:[PermissionFlagsBits.ViewChannel]
+          },
+          {
+            id: interaction.member.id,
+            allow:[PermissionFlagsBits.ViewChannel]
+          }
+          ],
+          parent:"1200730962401706104"
+        })
+        .then(_=>{})
+        .catch(_=>{
+          interaction.reply({content:"Something went wrong. Try again or contact @Nuclear303 to report a bot bug", ephemeral:true})
+        })
+      }
     }
     
     const command = client.commands.get(interaction.commandName);
@@ -202,7 +222,7 @@ client.on("interactionCreate", async interaction => {
     try
     {
 
-      if(command.data.name === 'kick' || command.data.name === 'timeout'){
+      if(command.data.name === 'kick' || command.data.name === 'timeout' || command.data.name === 'initializeticket' || command.data.name === "closeticket"){
         if (!interaction.member.roles.cache.has('1048606041597812798')) return interaction.reply({content: 'You require administator privileges to use that command!', ephemeral:true});
         else{
           await command.execute(interaction);
