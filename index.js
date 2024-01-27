@@ -209,7 +209,7 @@ client.on("interactionCreate", async interaction => {
           ],
           parent:"1200730962401706104"
         })
-        .then(_=>{interaction.reply(`Ticket created. Go to <@#ticket-${interaction.member.id}>`)})
+        .then(_=>{interaction.reply({content:`Ticket created. Go to <@#ticket-${interaction.member.id}>`, ephemeral:true})})
         .catch(_=>{
           interaction.reply({content:"Something went wrong. Try again or contact @Nuclear303 to report a bot bug", ephemeral:true})
         })
