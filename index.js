@@ -199,16 +199,17 @@ client.on("interactionCreate", async interaction => {
           name:`ticket-${interaction.member.id}`,
           type:ChannelType.GuildText,
           permissionOverwrites:[{
-            id: 894458473247567882,
+            id: "894458473247567882",
             deny:[PermissionFlagsBits.ViewChannel]
           },
           {
             id: interaction.member.id,
             allow:[PermissionFlagsBits.ViewChannel]
           }
-          ]
+          ],
+          parent:"1200730962401706104"
         }).catch(_=>{
-          interaction.reply("Something went wrong. Try again or contact @Nuclear303 to report a bot bug")
+          interaction.reply({content:"Something went wrong. Try again or contact @Nuclear303 to report a bot bug", ephemeral:true})
         })
       }
     }
