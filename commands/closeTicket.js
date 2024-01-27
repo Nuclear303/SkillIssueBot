@@ -8,7 +8,7 @@ module.exports = {
   async execute(interaction){
     interaction.channel.permissionOverwrites.set([{
       id: interaction.channel.name.split("-")[1],
-      deny: [PermissionFlagsBits.ViewChannel]
+      deny: [PermissionFlagsBits.SendMessages]
     },
     {
       id: "894458473247567882",
