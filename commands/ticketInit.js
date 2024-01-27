@@ -3,8 +3,7 @@ const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("
 module.exports = {
   data: new SlashCommandBuilder()
   .setName('initializeticket')
-  .setDescription("Initializes the ticket system")
-  .setDefaultMemberPermissions(0),
+  .setDescription("Initializes the ticket system"),
   async execute(interaction){
     const channel = interaction.guild.channels.cache.get('1200762577941188688');
     await channel.send({
