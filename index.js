@@ -205,7 +205,19 @@ client.on("interactionCreate", async interaction => {
           {
             id: interaction.member.id,
             allow:[PermissionFlagsBits.ViewChannel]
-          }
+          },
+          {
+            id:"1048606041597812798",
+            allow:[PermissionFlagsBits.ViewChannel]
+          },
+          {
+            id:"998682580268367884",
+            allow:[PermissionFlagsBits.ViewChannel]
+          },
+          {
+            id:"893305484537397278",
+            allow:[PermissionFlagsBits.ViewChannel]
+          },
           ],
           parent:"1200730962401706104"
         })
