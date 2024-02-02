@@ -28,6 +28,7 @@ module.exports = {
     }
     ])
     interaction.channel.setParent("1202957108987830282");
-    await interaction.reply("Ticket closed.");
+    await interaction.reply("Ticket closed.")
+    .catch(_=>{interaction.reply({content:"Can't close ticket. Not a ticket channel", ephemeral:true})});
   }
 }
