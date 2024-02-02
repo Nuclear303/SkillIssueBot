@@ -5,6 +5,10 @@ module.exports = {
   .setName('closeticket')
   .setDescription("Closes the active ticket"),
   async execute(interaction){
+    if(interaction.channel.name.split("-")[0] != "ticket"){
+      await interaction.reply({content:"Can't close ticket. Not a ticket channel", ephemeral:true});
+      return
+    }
     interaction.channel.permissionOverwrites.set([{
       id: interaction.channel.name.split("-")[1],
       allow:[PermissionFlagsBits.ViewChannel],
@@ -29,6 +33,5 @@ module.exports = {
     ])
     interaction.channel.setParent("1202957108987830282");
     await interaction.reply("Ticket closed.")
-    .catch(_=>{interaction.reply({content:"Can't close ticket. Not a ticket channel", ephemeral:true})});
   }
 }
