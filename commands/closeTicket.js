@@ -27,6 +27,7 @@ module.exports = {
       deny:[PermissionFlagsBits.ViewChannel]
     }
     ])
-    await interaction.reply("Ticket closed.")
+    interaction.channel.setParent("1202957108987830282");
+    await interaction.reply("Ticket closed.");
   }
 }
