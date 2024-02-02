@@ -2,7 +2,7 @@ require('dotenv').config();
 const {REST} = require("@discordjs/rest");
 const {Routes, PermissionFlagsBits} = require("discord-api-types/v9");
 const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle, GuildMember, ChannelType, OverwriteType } = require("discord.js");
-const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed, chanLinksEmbed, pornLinksEmbed, selfharmEmbed} = require("./embeds/embeds");
+const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed, chanLinksEmbed, pornLinksEmbed, selfharmEmbed, ticketWelcome} = require("./embeds/embeds");
 
 const path = require("path");
 const fs = require("fs");
@@ -221,7 +221,10 @@ client.on("interactionCreate", async interaction => {
           ],
           parent:"1200730962401706104"
         })
-        .then(_=>{interaction.reply({content:`Ticket created. Go to <@#ticket-${interaction.member.id}>`, ephemeral:true})})
+        .then(channel=>{
+          interaction.reply({content:`Ticket created. Go to <#${channel.id}>`, ephemeral:true});
+          channel.send({embeds:[ticketWelcome]});
+        })
         .catch(_=>{
           interaction.reply({content:"Something went wrong. Try again or contact @Nuclear303 to report a bot bug", ephemeral:true})
         })
