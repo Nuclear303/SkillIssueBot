@@ -2,7 +2,7 @@ require('dotenv').config();
 const {REST} = require("@discordjs/rest");
 const {Routes, PermissionFlagsBits} = require("discord-api-types/v9");
 const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle, GuildMember, ChannelType, OverwriteType } = require("discord.js");
-const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed, chanLinksEmbed, pornLinksEmbed, selfharmEmbed, ticketWelcome} = require("./embeds/embeds");
+const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed, chanLinksEmbed, pornLinksEmbed, selfharmEmbed, ticketWelcome, gifsEmbed} = require("./embeds/embeds");
 
 const path = require("path");
 const fs = require("fs");
@@ -95,7 +95,6 @@ client.on("messageCreate", message =>{
       "rule34.xxx",
       "rule34videos.com",
       "rule34world.com",
-      "https://media.discordapp.net/attachments/1192235193629679717/1200147172713308302/togif.gif?ex=65ce59a7&is=65bbe4a7&hm=c5d43670f481dab23433f9cdf5d793a7cd5816089257a40f6406e37d4fe9d1c9&"
     ]
     pornSites.forEach(site => {
       if(mess.includes(site)){
@@ -105,6 +104,18 @@ client.on("messageCreate", message =>{
         }).catch(_=>{});
       }
     });
+   }
+
+   const bannedGifs = [
+    "https://media.discordapp.net/attachments/1192235193629679717/1200147172713308302/togif.gif?ex=65ce59a7&is=65bbe4a7&hm=c5d43670f481dab23433f9cdf5d793a7cd5816089257a40f6406e37d4fe9d1c9&"
+   ]
+   for(let gif of bannedGifs){
+    if(mess.includes(gif)){
+      message.member.timeout(1000*600, "This gif breaks our rules").catch(_=>{});
+      message.member.user.send({embeds: [gifsEmbed]}).then(_=>{
+        message.delete();
+      }).catch(_=>{});
+    }
    }
 })
 

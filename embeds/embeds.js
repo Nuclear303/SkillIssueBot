@@ -58,6 +58,13 @@ const ticketWelcome = new EmbedBuilder()
 .setTimestamp()
 .setFooter({text:"Skill Issue Bot"});
 
+const gifsEmbed = new EmbedBuilder()
+.setColor(0xFF0000)
+.setTitle("Timeout: 10 minutes")
+.setDescription("The gif sent by you breaks our rules")
+.setTimestamp()
+.setFooter({text:"Skill Issue Bot"});
+
 module.exports ={
   KickDMEmbed,
   acceptEmbed,
@@ -66,5 +73,6 @@ module.exports ={
   chanLinksEmbed,
   pornLinksEmbed,
   selfharmEmbed,
-  ticketWelcome
+  ticketWelcome,
+  gifsEmbed
 }
