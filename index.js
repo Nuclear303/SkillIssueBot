@@ -94,7 +94,8 @@ client.on("messageCreate", message =>{
       "xhamster.com",
       "rule34.xxx",
       "rule34videos.com",
-      "rule34world.com"
+      "rule34world.com",
+      "https://media.discordapp.net/attachments/1192235193629679717/1200147172713308302/togif.gif?ex=65ce59a7&is=65bbe4a7&hm=c5d43670f481dab23433f9cdf5d793a7cd5816089257a40f6406e37d4fe9d1c9&"
     ]
     pornSites.forEach(site => {
       if(mess.includes(site)){
