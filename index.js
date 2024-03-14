@@ -290,7 +290,8 @@ client.on("interactionCreate", async interaction => {
     catch(error)
     {
         console.error(error);
-        await interaction.reply({content: "There was an error executing this command"});
+        await interaction.reply({content: "There was an error executing this command"})
+        .catch(_=>{});
     }
 });
 
