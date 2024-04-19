@@ -524,7 +524,7 @@ client.on("messageDelete", message =>{
           .setFooter({text: "Skill Issue Bot - Message Deleted"})
           .addFields({name: "Message Author", value: `${message.member}`, inline:true},
           {name: "Author ID:", value:`${message.member.id}`, inline:true},
-          {name: "Message content", value:`${mess}`})
+          {name: "Message content", value:`${message.cleanContent}`})
           .setTimestamp()
         ]})
       }
