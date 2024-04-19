@@ -11,12 +11,20 @@ const client = new Client({
   intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.GuildMembers, IntentsBitField.Flags.GuildBans, IntentsBitField.Flags.MessageContent, IntentsBitField.Flags.DirectMessages, IntentsBitField.Flags.GuildPresences]
 });
 
+/**
+ * squadronRole - role IDs for roles such as Twix Squadron Verified Member etc.
+ */
 const squadronRole = {
   "Twix": "998675476270825492",
   "Marz": "998675824129605632",
   "Mlky": "998675941712724159",
   "BNTY": "1048551330890924073"
 }
+
+/**
+ * pendingRole - role IDs for roles such as Twix Pending Verification etc.
+ */
+
 const pendingRole = {
   "Twix": "998674829513347082",
   "Marz": "998674942650490940",
@@ -55,9 +63,6 @@ client.on("ready", _=>{
 })
 
 client.on("messageCreate", message =>{
-  if(message.content.toLowerCase().includes("woźny") || message.content.toLowerCase().includes("w o ź n y") || message.content.toLowerCase().includes("uwu") || (message.content.toLowerCase().includes("this is not to annoy you"))){
-    message.delete();
-  }
   if(message.author.bot == true || message.member == null) return;
    if (!message.member.roles.cache.has('1048606041597812798')){
     const mess = message.content.toLowerCase();
@@ -510,7 +515,6 @@ client.on("roleDelete", role =>{
 });
 
 client.on("messageDelete", message =>{
-  if(message.attachments.size == 0){
     client.channels.fetch("881209789131161651", false).then(log =>{
       try{
         log.send({embeds: [
@@ -525,31 +529,26 @@ client.on("messageDelete", message =>{
         ]})
       }
       catch(err){
-
+        console.log(err)
+        client.channels.cache.get("1062081528567431218").send("messageDelete has failed");
       }
     })
-  }
-  else{
-    message.attachments.forEach(attachment =>{
-      client.channels.fetch("1046420086929494107", false).then(log =>{
-        log.send({embeds:[
-          new EmbedBuilder()
-            .setTitle(`Message Deleted in #${message.channel.name}`)
-            .setColor(0xa03d13)
-            .addFields({name: "Message Author", value: `${message.member}`, inline:true},
-              {name: "Author ID:", value:`${message.member.id}`, inline:true}
-            )
-            .setImage(`${attachment.attachment}`)
-            .setFooter({text:"Skill Issue Bot - Attachment Deleted"})
-            .setTimestamp()
-        ]})
-        const extension = attachment.attachment.split('.')[3];
-        if(extension == "mp4" || extension == "webm" || extension == "avi" || extension == "mkv"){
-          log.send("**Attached media:**");
-          log.send(attachment.attachment);
-        }
-      })
+  message.attachments.forEach(attachment =>{
+    client.channels.fetch("1046420086929494107", false).then(log =>{
+      log.send({embeds:[
+        new EmbedBuilder()
+          .setTitle(`Message Deleted in #${message.channel.name}`)
+          .setColor(0xa03d13)
+          .addFields({name: "Message Author", value: `${message.member}`, inline:true},
+            {name: "Author ID:", value:`${message.member.id}`, inline:true}
+          )
+          .setFooter({text:"Skill Issue Bot - Attachment Deleted"})
+          .setTimestamp()
+      ]});
+      log.send("**Attached media:**");
+      log.send(attachment.attachment);
     })
-  }
+  })
 })
-client.login(process.env.TOKEN)
+
+client.login(process.env.TOKEN); //login to the client
