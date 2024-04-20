@@ -34,10 +34,12 @@ const pendingRole = {
 
 function acceptApplication(interaction, embedId){
   interaction.reply(`Accepted user ${interaction.guild.members.cache.get(embedId).nickname ?? interaction.guild.members.cache.get(embedId).user.username}`);
-  interaction.guild.members.cache.get(embedId).user.send({embeds: [acceptEmbed]}).catch(_=>{
-    console.log("Couldn't send accept embed to user")
+  interaction.guild.members.cache.get(embedId).user.send({embeds: [acceptEmbed]}).catch(err=>{
+    console.log(err)
+    outputChannel.send("Couldn't send accept embed to user")
   });
-  interaction.message.delete().catch(_=>{
+  interaction.message.delete().catch(err=>{
+    console.log(err)
     console.log("Couldn't delete application embed")
   });
 }
@@ -134,6 +136,8 @@ client.on("messageCreate", message =>{
       "hentaidude.com",
       "hentaihaven.com"
     ]
+
+    //disallow porn links
     pornSites.forEach(site => {
       if(mess.includes(site)){
         message.member.timeout(1000*3600*24*7, "Porn sites aren't allowed on this server").catch(_=>{});
@@ -261,8 +265,9 @@ client.on("interactionCreate", async interaction => {
           interaction.reply({content:`Ticket created. Go to <#${channel.id}>`, ephemeral:true});
           channel.send({embeds:[ticketWelcome]});
         })
-        .catch(_=>{
-          interaction.reply({content:"Something went wrong. Try again or contact @Nuclear303 to report a bot bug", ephemeral:true})
+        .catch(err=>{
+          console.log(err)
+          interaction.reply({content:"Something went wrong. Try again or contact <@484397309476470788> to report a bot bug", ephemeral:true})
         })
       }
     }
@@ -314,7 +319,10 @@ client.on("interactionCreate", async interaction => {
     {
         console.error(error);
         await interaction.reply({content: "There was an error executing this command"})
-        .catch(_=>{});
+        .catch(err=>{
+          console.log(err);
+          outputChannel.send("A command has failed");
+        });
     }
 });
 
@@ -332,8 +340,9 @@ client.on('guildMemberAdd', member => {
     .setFooter({text:"Skill Issue Bot - Member Joined"})
     .setTimestamp()
   ]});
-
+  // default profile picture links
   const defaults = ["https://cdn.discordapp.com/embed/avatars/0.png","https://cdn.discordapp.com/embed/avatars/1.png","https://cdn.discordapp.com/embed/avatars/2.png", "https://cdn.discordapp.com/embed/avatars/3.png","https://cdn.discordapp.com/embed/avatars/4.png" ,"https://cdn.discordapp.com/embed/avatars/5.png"];
+  
   if(defaults.includes(String(member.displayAvatarURL()))){
     const messageEmbed = new EmbedBuilder()
     .setColor(0xFF0000)
@@ -345,24 +354,26 @@ client.on('guildMemberAdd', member => {
     .setTimestamp()
     .setFooter({text:"Skill Issue Bot"});
 
-    member.guild.channels.cache.get("1062081528567431218").send({embeds:[messageEmbed]});
+    outputChannel.send({embeds:[messageEmbed]});
     client.users.fetch(`${member.id}`,false)
       .then(_=>{
         member.user.send({embeds:[KickDMEmbed]}).then(_=>{
-          member.guild.channels.cache.get("1062081528567431218").send(`Successfully sent a message to ${member.user.tag}`);
+          outputChannel.send(`Successfully sent a message to ${member.user.tag}`);
           console.log(`Successfully messaged ${member.user.username}`)})
           .catch(_=>{
-            member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}.`);
+            outputChannel.send(`Could not send a message to ${member.user.tag}.`);
             console.log(`Could not send a message to ${member.user.tag}.`)
         });
         })
-        .catch(_=>{
-          member.guild.channels.cache.get("1062081528567431218").send(`Could not send a message to ${member.user.tag}.`);
-          console.log(`Could not send a message to ${member.user.tag}.`)
+        .catch(err=>{
+          outputChannel.send(`Could not send a message to ${member.user.tag}.`);
+          console.log(err)
       });
+      // kicks if a user has a default pfp
     setTimeout(_=>{member.kick()}, 500);
   }
   else{
+    // adds the * role
     member.roles.add("1051078951885357108");
     member.guild.channels.cache.get("879055215695904788").send({embeds:
       [
@@ -375,6 +386,7 @@ client.on('guildMemberAdd', member => {
   }
 })
 
+// invoked when a user leaves the server
 client.on("guildMemberRemove", member =>{
   const memberLeft = new EmbedBuilder()
   .setTitle("Member left")
@@ -386,6 +398,7 @@ client.on("guildMemberRemove", member =>{
   .setFooter({text: "Skill Issue Bot - Member Left"})
   .setTimestamp();
   let roleCount = 1;
+  // lists the users roles before his departure
   member.roles.cache.each(role =>{
     if(role.name != "@everyone"){
       memberLeft.addFields({name:`Role #${roleCount}:`, value:`@${role.name}`, inline:true})
@@ -395,7 +408,7 @@ client.on("guildMemberRemove", member =>{
   member.guild.channels.cache.get("999028490164772985").send({embeds:[memberLeft]});
 });
 
-
+// invoked when a user is banned
 client.on("guildBanAdd", (member) => {
   
   member.guild.bans.fetch(`${member.user.id}`).then(ban =>{
@@ -408,7 +421,7 @@ client.on("guildBanAdd", (member) => {
         {name:"Reason", value:`${ban.reason}`})
       .setFooter({text:"Skill Issue Bot - Member Banned"})
       .setTimestamp();
-
+    // creates a button allowing for a quick unban
     const unbanButton = new ActionRowBuilder()
     .addComponents(
       new ButtonBuilder()
@@ -416,6 +429,7 @@ client.on("guildBanAdd", (member) => {
         .setLabel("Unban")
         .setStyle(ButtonStyle.Danger)
     );
+    //sends the embed to #warn-logs
     client.channels.fetch("999028671895584848").then(channel =>{
       channel.send({embeds:[banMember],components:[unbanButton]});
     }) 
