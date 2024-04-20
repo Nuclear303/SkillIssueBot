@@ -33,7 +33,7 @@ const pendingRole = {
 }
 
 function acceptApplication(interaction, embedId){
-  interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
+  interaction.reply(`Accepted user ${interaction.guild.members.cache.get(embedId).nickname ?? interaction.guild.members.cache.get(embedId).user.username}`);
   interaction.guild.members.cache.get(embedId).user.send({embeds: [acceptEmbed]}).catch(_=>{
     console.log("Couldn't send accept embed to user")
   });
