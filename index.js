@@ -32,9 +32,19 @@ const pendingRole = {
   "BNTY": "1048555345573847080"
 }
 
+function acceptApplication(interaction, embedId){
+  interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
+  interaction.guild.members.cache.get(embedId).user.send({embeds: [acceptEmbed]}).catch(_=>{
+    console.log("Couldn't send accept embed to user")
+  });
+  interaction.message.delete().catch(_=>{
+    console.log("Couldn't delete application embed")
+  });
+}
+
 const commands = [];
 client.commands = new Collection();
-
+let outputChannel;
 const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
@@ -47,6 +57,7 @@ for (const file of commandFiles) {
 client.on("ready", _=>{
   client.guilds.fetch("735871800730189916", false).then(guild=>{
     guild.members.fetch();
+    outputChannel = guild.channels.cache.get("1062081528567431218");
   })
   const guild_ids = client.guilds.cache.map(guild => guild.id);
   
@@ -59,38 +70,58 @@ client.on("ready", _=>{
     .then(console.log(`Ready to work with ${guildId}`))
     .catch(console.error);
   }
-  
 })
 
 client.on("messageCreate", message =>{
+  //don't check the messages if sent by a staff member or a bot
   if(message.author.bot == true || message.member == null) return;
    if (!message.member.roles.cache.has('1048606041597812798')){
     const mess = message.content.toLowerCase();
+    // delete free nitro links
     if(mess.includes("discord.gift")){
       message.member.timeout(1000*3600*24*3, "Sending/offering free nitro links").catch(_=>{});
       message.member.user.send({embeds: [nitroLinksEmbed]}).then(_=>{
         message.delete();
       }).catch(_=>{});
     }
+
+    // delete discord invite links if they're not the official Remy HUB link
     else if((mess.includes("discord.com/invite") || mess.includes("discord.gg")) && !mess.includes("discord.gg/Qsybqr6sjZ")){
-      message.member.timeout(1000*3600*24*3, "Sending discord invite links").catch(_=>{});
+      message.member.timeout(1000*3600*24*3, "Sending discord invite links").catch(err=>{
+        console.log(err);
+        outputChannel.send("Could not timeout " + message.member.user.username + " for sending an invite link.");
+      });
       message.member.user.send({embeds: [inviteLinksEmbed]}).then(_=>{
         message.delete();
-      }).catch(_=>{});
+      }).catch(err=>{
+        console.log(err);
+        outputChannel.send("Could not send an inviteLinks embed to " + message.member.user.username);
+      });
       
     }
+
+    // disallow 4chan links
     else if(mess.includes("4chan.org")){
-      message.member.timeout(1000*3600*24*7, "4chan is not allowed on this server").catch(_=>{});
+      message.member.timeout(1000*3600*24*7, "4chan links are not allowed on this server").catch(err=>{
+        console.log(err);
+        outputChannel.send("Could not timeout " + message.member.user.username + " for sending a 4chan link.");
+      });
       message.member.user.send({embeds: [chanLinksEmbed]}).then(_=>{
         message.delete();
-      }).catch(_=>{});
+      }).catch(err=>{
+        console.log(err);
+        outputChannel.send("Could not send a 4chan_delete embed to " + message.member.user.username);
+      });
     }
-    else if(mess.includes("kys ") || mess == "kys" || mess.includes("kуs") || mess.includes("куs")|| mess.includes("кys") ||(mess.includes("kill") && (mess.includes("yourself") || mess.includes("your self") || mess.includes("yourselves") || mess.includes("your selves")))){
+    // disallow encouraging selfharm (even jokingly)
+    else if(mess.includes("kys ") || mess.includes(" kys") || mess == "kys" || mess.includes("kуs") || mess.includes("куs")|| mess.includes("кys") ||(mess.includes("kill") && (mess.includes("yourself") || mess.includes("your self") || mess.includes("yourselves") || mess.includes("your selves")))){
       message.member.timeout(1000*600, "Encouraging selfharm").catch(_=>{});
       message.member.user.send({embeds: [selfharmEmbed]}).then(_=>{
         message.delete();
       }).catch(_=>{});
     }
+    // list of pornsites that are not allowed (those not listed are still not allowed)
+    //TODO: add more sites
     const pornSites = [
       "pornhub.com",
       "xvideos.com",
@@ -100,6 +131,8 @@ client.on("messageCreate", message =>{
       "rule34.xxx",
       "rule34videos.com",
       "rule34world.com",
+      "hentaidude.com",
+      "hentaihaven.com"
     ]
     pornSites.forEach(site => {
       if(mess.includes(site)){
@@ -126,65 +159,47 @@ client.on("messageCreate", message =>{
 })
 
 client.on("interactionCreate", async interaction => {
+    // ignore interactions that are not used in the server
     if(!interaction.isCommand() && !interaction.isButton()) return;
+    
 
     if(interaction.isButton()){
+      // customId for applications and bans
       const customId = interaction.customId.split(" ");
+      //unbanning banned members
       if(customId[0] === "unban"){
         const id = customId[1]
         interaction.guild.members.unban(`${id}`);
         interaction.reply(`Successfully unbanned ${id}`)
       }
+      //accepting squadron applications
       else if(customId[0] === "accept"){
         if(interaction.guild.members.cache.get(customId[1]) != null){
           const id = customId[1];
-        if(interaction.guild.members.cache.get(id).roles.cache.has("998674829513347082")){
-          interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
-          interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
-          interaction.guild.members.cache.get(id).user.send({embeds: [acceptEmbed]}).catch(_=>{
-            console.log("Couldn't send accept embed to user")
-          });
-          interaction.message.delete().catch(_=>{
-            console.log("Couldn't delete application embed")
-          });
-        }
-        else if(interaction.guild.members.cache.get(id).roles.cache.has("998674942650490940")){
-          interaction.guild.members.cache.get(id).roles.add(squadronRole["Marz"]); 
-          interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
-          interaction.guild.members.cache.get(id).send({embeds: [acceptEmbed]}).catch(_=>{
-            console.log("Couldn't send accept embed to user")
-          });
-          interaction.message.delete().catch(_=>{
-            console.log("Couldn't delete application embed")
-          });
-        }
-        else if(interaction.guild.members.cache.get(id).roles.cache.has("998675147168948234")){
-          interaction.guild.members.cache.get(id).roles.add(squadronRole["Mlky"]); 
-          interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
-          interaction.guild.members.cache.get(id).send({embeds: [acceptEmbed]}).catch(_=>{
-            console.log("Couldn't send accept embed to user")
-          });
-          interaction.message.delete().catch(_=>{
-            console.log("Couldn't delete application embed")
-          });
-        }
-        else if(interaction.guild.members.cache.get(id).roles.cache.has("1048555345573847080")){
-          interaction.guild.members.cache.get(id).roles.add(squadronRole["BNTY"]); 
-          interaction.reply(`Accepted user ${interaction.guild.members.cache.get(id).nickname ?? interaction.guild.members.cache.get(id).user.username}`);
-          interaction.guild.members.cache.get(id).send({embeds: [acceptEmbed]}).catch(_=>{
-            console.log("Couldn't send accept embed to user")
-          });
-          interaction.message.delete().catch(_=>{
-            console.log("Couldn't delete application embed")
-          });
-        }
-        else{
-          interaction.reply("Error: User left or already verified")
-          interaction.message.delete().catch(_=>{
-            console.log("Couldn't delete application embed")
-          });
-        }
-        
+            
+          if(interaction.guild.members.cache.get(id).roles.cache.has("998674829513347082")){
+            interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
+            acceptApplication(interaction, id);
+          }
+          else if(interaction.guild.members.cache.get(id).roles.cache.has("998674942650490940")){
+            interaction.guild.members.cache.get(id).roles.add(squadronRole["Marz"]); 
+            acceptApplication(interaction, id);
+          }
+          else if(interaction.guild.members.cache.get(id).roles.cache.has("998675147168948234")){
+            interaction.guild.members.cache.get(id).roles.add(squadronRole["Mlky"]); 
+            acceptApplication(interaction, id);
+          }
+          else if(interaction.guild.members.cache.get(id).roles.cache.has("1048555345573847080")){
+            interaction.guild.members.cache.get(id).roles.add(squadronRole["BNTY"]); 
+            acceptApplication(interaction, id);
+          }
+          else{
+            interaction.reply("Error: User left or already verified")
+            interaction.message.delete().catch(_=>{
+              console.log("Couldn't delete application embed")
+            });
+          }
+          
         }
       }
       else if(customId[0] === "reject"){
@@ -197,17 +212,20 @@ client.on("interactionCreate", async interaction => {
           .addFields({name:"Recruiter that rejected the application", value: interaction.member.nickname})
           .setTimestamp()
           .setFooter({text:"Skill Issue Bot"});
-          interaction.guild.members.cache.get(id).send({embeds: [rejectionEmbed]}).catch(_=>{
-            console.log("Couldn't send accept embed to user")
+          interaction.guild.members.cache.get(id).send({embeds: [rejectionEmbed]}).catch(err=>{
+            console.log(err)
+            outputChannel.send("Couldn't send rejection embed to user");
           });
   
-          interaction.message.delete().catch(_=>{
-            console.log("Couldn't delete application embed")
+          interaction.message.delete().catch(err=>{
+            console.log(err)
+            outputChannel.send("Couldn't delete application embed")
           });
         }
         else{
-          interaction.message.delete().catch(_=>{
-            console.log("Couldn't delete application embed")
+          interaction.message.delete().catch(err=>{
+            console.log(err);
+            outputChannel.send("Couldn't delete application embed")
           });
         }
         
@@ -448,6 +466,8 @@ client.on("channelDelete", channel =>{
     ]})
   })
 });
+
+
 client.on("guildMemberUpdate", (oldM, newM) =>{
   
   if(oldM.nickname != newM.nickname){
