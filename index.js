@@ -421,18 +421,22 @@ client.on("guildBanAdd", (member) => {
         {name:"Reason", value:`${ban.reason}`})
       .setFooter({text:"Skill Issue Bot - Member Banned"})
       .setTimestamp();
-    // creates a button allowing for a quick unban
-    const unbanButton = new ActionRowBuilder()
-    .addComponents(
-      new ButtonBuilder()
-        .setCustomId(`unban ${member.user.id}`)
-        .setLabel("Unban")
-        .setStyle(ButtonStyle.Danger)
-    );
-    //sends the embed to #warn-logs
-    client.channels.fetch("999028671895584848").then(channel =>{
-      channel.send({embeds:[banMember],components:[unbanButton]});
-    }) 
+      // creates a button allowing for a quick unban
+      const unbanButton = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId(`unban ${member.user.id}`)
+          .setLabel("Unban")
+          .setStyle(ButtonStyle.Danger)
+      );
+      //sends the embed to #warn-logs
+      client.channels.fetch("999028671895584848").then(channel =>{
+        channel.send({embeds:[banMember],components:[unbanButton]});
+      })
+      .catch(err=>{
+        console.log(err)
+        outputChannel.send("Could not fetch #warn-logs channel")
+      })
     })
   
 });
@@ -450,6 +454,10 @@ client.on("guildBanRemove", (member) => {
       .setFooter({text:"Skill Issue Bot - Member unbanned"})
       .setTimestamp()
     ]})
+    .catch(err=>{
+      console.log(err)
+      outputChannel.send("Could not fetch #warn-logs channel")
+    })
   }) 
 });
 
@@ -465,6 +473,10 @@ client.on("channelCreate", channel =>{
         .setTimestamp()
     ]})
   })
+  .catch(err=>{
+    console.log(err)
+    outputChannel.send("Could not fetch #staff-changes channel")
+  })
 });
 
 client.on("channelDelete", channel =>{
@@ -478,6 +490,10 @@ client.on("channelDelete", channel =>{
         .setFooter({text:"Skill Issue Bot - Channel Deleted"})
         .setTimestamp()
     ]})
+    .catch(err=>{
+      console.log(err)
+      outputChannel.send("Could not fetch #staff-changes channel")
+    })
   })
 });
 
@@ -498,6 +514,10 @@ client.on("guildMemberUpdate", (oldM, newM) =>{
           .setThumbnail(`${newM.displayAvatarURL()}`)
           .setTimestamp()
       ]})
+      .catch(err=>{
+        console.log(err)
+        outputChannel.send("Could not fetch #member-logs channel")
+      })
     })
   }
   const guild = client.guilds.cache.get("735871800730189916");
@@ -532,6 +552,10 @@ client.on("roleCreate", role =>{
         .setTimestamp()
     ]})
   })
+  .catch(err=>{
+    console.log(err)
+    outputChannel.send("Could not fetch #member-logs channel")
+  })
 })
 
 client.on("roleDelete", role =>{
@@ -545,6 +569,10 @@ client.on("roleDelete", role =>{
         .setFooter({text:"Skill Issue Bot - Role Deleted"})
         .setTimestamp()
     ]})
+  })
+  .catch(err=>{
+    console.log(err)
+    outputChannel.send("Could not fetch #member-logs channel")
   })
 });
 
@@ -566,6 +594,10 @@ client.on("messageDelete", message =>{
         console.log(err)
         client.channels.cache.get("1062081528567431218").send("messageDelete has failed");
       }
+    })
+    .catch(err=>{
+      console.log(err)
+      outputChannel.send("Could not fetch #message-log channel")
     })
   message.attachments.forEach(attachment =>{
     client.channels.fetch("1046420086929494107", false).then(log =>{
