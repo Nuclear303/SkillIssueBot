@@ -267,6 +267,7 @@ client.on("interactionCreate", async interaction => {
         })
         .catch(err=>{
           console.log(err)
+          outputChannel.send("Could not create a ticket channel");
           interaction.reply({content:"Something went wrong. Try again or contact <@484397309476470788> to report a bot bug", ephemeral:true})
         })
       }
@@ -299,9 +300,6 @@ client.on("interactionCreate", async interaction => {
           return interaction.reply({content: `You can't apply without a pending verification role! Get one from <#894445518573404230>`, ephemeral:true})
         }
         else if(((interaction.options.getString('ign') != interaction.guild.members.cache.get(interaction.user.id).nickname))&&((interaction.options.getString('ign') != interaction.user.displayName))){
-          console.log("IGN: ", interaction.options.getString('ign'))
-          console.log("Nickname: ", interaction.guild.members.cache.get(interaction.user.id).nickname);
-          console.log("Username: ", interaction.user.displayName)
           return interaction.reply({content: `Your nickname doesn't match the provided IGN! Please change it!`, ephemeral:true})
         }
         else if(!interaction.member.roles.cache.has(pendingRole[interaction.options.getString('squadron')])){
@@ -327,19 +325,26 @@ client.on("interactionCreate", async interaction => {
 });
 
 client.on('guildMemberAdd', member => {
-  member.guild.channels.cache.get("999028490164772985").send({embeds:[
-    new EmbedBuilder()
-    .setTitle("Member joined")
-    .setThumbnail(`${member.displayAvatarURL()}`)
-    .setColor(0x166AFC)
-    .addFields(
-      {name: "Nickname", value:`${member.user.tag}`},
-      {name: "ID", value:`${member.id}`},
-      {name:"Created on", value:`${member.user.createdAt.toDateString()}`}
-    )
-    .setFooter({text:"Skill Issue Bot - Member Joined"})
-    .setTimestamp()
-  ]});
+  member.guild.channels.fetch("999028490164772985", false).then(memberLogs=>{
+    memberLogs.send({embeds:[
+      new EmbedBuilder()
+      .setTitle("Member joined")
+      .setThumbnail(`${member.displayAvatarURL()}`)
+      .setColor(0x166AFC)
+      .addFields(
+        {name: "Nickname", value:`${member.user.tag}`},
+        {name: "ID", value:`${member.id}`},
+        {name:"Created on", value:`${member.user.createdAt.toDateString()}`}
+      )
+      .setFooter({text:"Skill Issue Bot - Member Joined"})
+      .setTimestamp()
+    ]});
+  })
+  .catch(err=>{
+    console.log(err)
+    outputChannel.send("Could not fetch #member-logs channel")
+  })
+
   // default profile picture links
   const defaults = ["https://cdn.discordapp.com/embed/avatars/0.png","https://cdn.discordapp.com/embed/avatars/1.png","https://cdn.discordapp.com/embed/avatars/2.png", "https://cdn.discordapp.com/embed/avatars/3.png","https://cdn.discordapp.com/embed/avatars/4.png" ,"https://cdn.discordapp.com/embed/avatars/5.png"];
   
@@ -355,6 +360,8 @@ client.on('guildMemberAdd', member => {
     .setFooter({text:"Skill Issue Bot"});
 
     outputChannel.send({embeds:[messageEmbed]});
+
+
     client.users.fetch(`${member.id}`,false)
       .then(_=>{
         member.user.send({embeds:[KickDMEmbed]}).then(_=>{
@@ -366,8 +373,8 @@ client.on('guildMemberAdd', member => {
         });
         })
         .catch(err=>{
-          outputChannel.send(`Could not send a message to ${member.user.tag}.`);
           console.log(err)
+          outputChannel.send(`Could not send a message to ${member.user.tag}.`);
       });
       // kicks if a user has a default pfp
     setTimeout(_=>{member.kick()}, 500);
@@ -375,14 +382,21 @@ client.on('guildMemberAdd', member => {
   else{
     // adds the * role
     member.roles.add("1051078951885357108");
-    member.guild.channels.cache.get("879055215695904788").send({embeds:
-      [
-        new EmbedBuilder()
-        .setTitle("Welcome to the server!")
-        .setThumbnail(member.displayAvatarURL())
-        .setFooter({text: `Skill Issue Bot - Member #${member.guild.memberCount}`})
-        .setTimestamp()
-      ], content: `Welcome to the server, ${member.user.toString()}!`})
+    member.guild.channels.fetch("879055215695904788", false).then(welcomeChannel=>{
+      welcomeChannel.send({embeds:
+        [
+          new EmbedBuilder()
+          .setTitle("Welcome to the server!")
+          .setThumbnail(member.displayAvatarURL())
+          .setFooter({text: `Skill Issue Bot - Member #${member.guild.memberCount}`})
+          .setTimestamp()
+        ], content: `Welcome to the server, ${member.user.toString()}!`
+      })
+    })
+    .catch(err=>{
+      console.log(err)
+      outputChannel.send("Could not fetch #welcome channel")
+    })
   }
 })
 
