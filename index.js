@@ -279,7 +279,7 @@ client.on("interactionCreate", async interaction => {
     try
     {
 
-      if(command.data.name === 'kick' || command.data.name === 'timeout' || command.data.name === 'initializeticket' || command.data.name === "closeticket"){
+      if(['kick', 'timout', 'initializeticket', 'closeticket', 'warn'].includes(command.data.name)){
         if (!interaction.member.roles.cache.has('1048606041597812798')) return interaction.reply({content: 'You require administator privileges to use that command!', ephemeral:true});
         else{
           await command.execute(interaction);
