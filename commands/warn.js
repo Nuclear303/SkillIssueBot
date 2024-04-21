@@ -35,7 +35,7 @@ module.exports = {
     .setTimestamp()
 
     member.send({embeds:[embedForUser]});
-    interaction.guild.channels.cache.get("1062081528567431218").send({embeds:[embedForMods]})
+    interaction.guild.channels.cache.get("999028671895584848").send({embeds:[embedForMods]})
     interaction.reply("Successfully warned the user");
   }
 }
