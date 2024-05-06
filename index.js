@@ -598,9 +598,9 @@ client.on("messageDelete", message =>{
           .setTitle(`Message Deleted in #${message.channel.name}`)
           .setColor(0xa03d13)
           .setFooter({text: "Skill Issue Bot - Message Deleted"})
-          .addFields({name: "Message Author", value: `${message.member.user.username}`, inline:true},
+          .addFields([{name: "Message Author", value: `${message.member.user.username}`, inline:true},
           {name: "Author ID:", value:`${message.member.id}`, inline:true},
-          {name: "Message content", value:`${message.cleanContent}`})
+          {name: "Message content", value:`${message.cleanContent}`}])
           .setTimestamp()
         ]})
       }
