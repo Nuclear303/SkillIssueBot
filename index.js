@@ -269,8 +269,7 @@ client.on("interactionCreate", async interaction => {
         })
         .then(channel=>{
           interaction.reply({content:`Ticket created. Go to <#${channel.id}>`, ephemeral:true});
-          channel.send({content: [`Hi! <@${interaction.member.id}>`]});
-          channel.send({embeds:[ticketWelcome]});
+          channel.send({content: `Hi! <@${interaction.member.id}>`, embeds:[ticketWelcome]});
         })
         .catch(err=>{
           console.log(err)
