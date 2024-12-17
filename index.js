@@ -238,7 +238,7 @@ client.on("interactionCreate", async interaction => {
         const ticketWelcome = new EmbedBuilder()
         .setColor(0x00FF00)
         .setTitle("Remy HUB Support")
-        .setDescription(`Hi! <@${interaction.member.id}>\n Please describe your issue, our staff will respond to you shortly.\nThank you for your patience!`)
+        .setDescription(`Please describe your issue, our staff will respond to you shortly.\nThank you for your patience!`)
         .setTimestamp()
         .setFooter({text:"Skill Issue Bot"});
         interaction.guild.channels.create({
@@ -269,7 +269,7 @@ client.on("interactionCreate", async interaction => {
         })
         .then(channel=>{
           interaction.reply({content:`Ticket created. Go to <#${channel.id}>`, ephemeral:true});
-          channel.send({embeds:[ticketWelcome]});
+          channel.send({content: [`Hi! <@${interaction.member.id}>`], embeds:[ticketWelcome]});
         })
         .catch(err=>{
           console.log(err)
