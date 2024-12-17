@@ -2,7 +2,7 @@ require('dotenv').config();
 const {REST} = require("@discordjs/rest");
 const {Routes, PermissionFlagsBits} = require("discord-api-types/v9");
 const {  Client, IntentsBitField, Collection, EmbedBuilder, ButtonStyle, GuildMember, ChannelType, OverwriteType } = require("discord.js");
-const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed, chanLinksEmbed, pornLinksEmbed, selfharmEmbed, ticketWelcome, gifsEmbed} = require("./embeds/embeds");
+const {KickDMEmbed, acceptEmbed, inviteLinksEmbed, nitroLinksEmbed, chanLinksEmbed, pornLinksEmbed, selfharmEmbed, gifsEmbed} = require("./embeds/embeds");
 
 const path = require("path");
 const fs = require("fs");
@@ -235,6 +235,12 @@ client.on("interactionCreate", async interaction => {
         
       }
       else if(customId[0] == "createTicket"){
+        const ticketWelcome = new EmbedBuilder()
+        .setColor(0x00FF00)
+        .setTitle("Remy HUB Support")
+        .setDescription(`Hi! <@{interaction.member.id}>\n Please describe your issue, our staff will respond to you shortly.\nThank you for your patience!`)
+        .setTimestamp()
+        .setFooter({text:"Skill Issue Bot"});
         interaction.guild.channels.create({
           name:`ticket-${interaction.member.id}`,
           type:ChannelType.GuildText,

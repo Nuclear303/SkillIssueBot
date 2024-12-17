@@ -51,12 +51,7 @@ const selfharmEmbed = new EmbedBuilder()
 .setTimestamp()
 .setFooter({text:"Skill Issue Bot"});
 
-const ticketWelcome = new EmbedBuilder()
-.setColor(0x00FF00)
-.setTitle("Remy HUB Support")
-.setDescription("Please describe your issue, our staff will respond to you shortly.\nThank you for your patience!")
-.setTimestamp()
-.setFooter({text:"Skill Issue Bot"});
+
 
 const gifsEmbed = new EmbedBuilder()
 .setColor(0xFF0000)
@@ -73,6 +68,5 @@ module.exports ={
   chanLinksEmbed,
   pornLinksEmbed,
   selfharmEmbed,
-  ticketWelcome,
   gifsEmbed
 }
