@@ -10,6 +10,7 @@ module.exports = {
     .setRequired(true)
   ),
   async execute(interaction){
+    await interaction.deferReply({ ephemeral: true });
     if(interaction.channel.name.split("-")[0] != "ticket"){
       await interaction.reply({content:"Can't close ticket. Not a ticket channel", ephemeral:true});
       return
