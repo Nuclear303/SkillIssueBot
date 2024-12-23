@@ -10,10 +10,9 @@ module.exports = {
     .setRequired(true)
   ),
   async execute(interaction){
-    await interaction.deferReply({ ephemeral: true });
     if(interaction.channel.name.split("-")[0] != "ticket"){
       await interaction.reply({content:"Can't close ticket. Not a ticket channel", ephemeral:true});
-      return
+      return;
     }
     if(interaction.guild.members.cache.get(interaction.channel.name.split("-")[1])){
       interaction.channel.permissionOverwrites.set([{
@@ -36,19 +35,18 @@ module.exports = {
       {
         id: "894458473247567882",
         deny:[PermissionFlagsBits.ViewChannel]
-      }
-      ])
-        await interaction.reply("Ticket closed.")
-      }
-      else{
-        await interaction.reply("Ticket closed. Member no longer on the server")
-      }
-      if(interaction.options.getBoolean("Add to archive")){
-        interaction.channel.setParent("1202957108987830282");
-      }
-      else{
-        interaction.channel.delete();
-      }
+      }]);
+      await interaction.reply("Ticket closed.")
     }
+    else{
+      await interaction.reply("Ticket closed. Member no longer on the server")
+    }
+    if(interaction.options.getBoolean("Add to archive")){
+      await interaction.channel.setParent("1202957108987830282");
+    }
+    else{
+      await interaction.channel.delete();
+    }
+  }
     
 }
