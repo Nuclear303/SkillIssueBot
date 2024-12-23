@@ -5,7 +5,7 @@ module.exports = {
   .setName('closeticket')
   .setDescription("Closes the active ticket")
   .addBooleanOption(option =>
-    option.setName('addToArchive')
+    option.setName('addtoarchive')
     .setDescription('Specify whether to add the ticket to the archive. WARNING: This will delete the channel if set to false')
     .setRequired(true)
   ),
