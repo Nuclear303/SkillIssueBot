@@ -3,7 +3,12 @@ const { PermissionFlagsBits } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
   .setName('closeticket')
-  .setDescription("Closes the active ticket"),
+  .setDescription("Closes the active ticket")
+  .addBooleanOption(option =>
+    option.setName('Add to archive')
+    .setDescription('Specify whether to add the ticket to the archive. WARNING: This will delete the channel if set to false')
+    .setRequired(true)
+  ),
   async execute(interaction){
     if(interaction.channel.name.split("-")[0] != "ticket"){
       await interaction.reply({content:"Can't close ticket. Not a ticket channel", ephemeral:true});
@@ -32,12 +37,16 @@ module.exports = {
         deny:[PermissionFlagsBits.ViewChannel]
       }
       ])
-        interaction.channel.setParent("1202957108987830282");
         await interaction.reply("Ticket closed.")
       }
       else{
-        interaction.channel.setParent("1202957108987830282");
         await interaction.reply("Ticket closed. Member no longer on the server")
+      }
+      if(interaction.options.getBoolean("Add to archive")){
+        interaction.channel.setParent("1202957108987830282");
+      }
+      else{
+        interaction.channel.delete();
       }
     }
     
