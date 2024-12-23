@@ -41,7 +41,7 @@ module.exports = {
     else{
       await interaction.reply("Ticket closed. Member no longer on the server")
     }
-    if(interaction.options.getBoolean("Add to archive")){
+    if(interaction.options.getBoolean("addtoarchive")){
       await interaction.channel.setParent("1202957108987830282");
     }
     else{
