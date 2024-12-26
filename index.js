@@ -33,7 +33,7 @@ const pendingRole = {
 }
 
 function acceptApplication(interaction, embedId){
-  interaction.reply(`Accepted user ${interaction.guild.members.cache.get(embedId).nickname ?? interaction.guild.members.cache.get(embedId).user.username}`);
+  interaction.reply({ content: `Accepted user ${interaction.guild.members.cache.get(embedId).nickname ?? interaction.guild.members.cache.get(embedId).user.username}`});
   interaction.guild.members.cache.get(embedId).user.send({embeds: [acceptEmbed]}).catch(err=>{
     console.log(err)
     outputChannel.send("Couldn't send accept embed to user")
@@ -180,7 +180,6 @@ client.on("interactionCreate", async interaction => {
       else if(customId[0] === "accept"){
         if(interaction.guild.members.cache.get(customId[1]) != null){
           const id = customId[1];
-            
           if(interaction.guild.members.cache.get(id).roles.cache.has("998674829513347082")){
             interaction.guild.members.cache.get(id).roles.add(squadronRole["Twix"]); 
             acceptApplication(interaction, id);
